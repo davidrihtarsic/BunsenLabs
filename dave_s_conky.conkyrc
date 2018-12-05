@@ -1,0 +1,98 @@
+# Popravil david  Enjoy! :)
+##############################################
+# Settings
+##############################################
+background yes
+use_xft yes
+xftfont Sans:size=8
+xftalpha 1
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 140 200
+maximum_width 140
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color FFDEAD
+color5 FFDEAD # NavajoWhite
+default_shade_color black
+default_outline_color white
+alignment top_right
+gap_x 0
+gap_y 36
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale yes
+
+TEXT
+#${font sans-serif:bold:size=8}SYSTEM ${hr 2}
+#${font sans-serif:normal:size=8}$sysname $kernel $alignr $machine
+# Host:$alignr$nodename
+#Uptime:$alignr$uptime
+#File System: $alignr${fs_type}
+${font Monospace:bold:size=8}${alignc}${color5}${time %X}
+${goto 2}${color1}${execpi 7200 LAR=`date +%-d`; ncal -bh | sed 's/\<'$LAR'\>/${color5}&${color1}/' | sed ':a;N;$!ba;s/\n/\n${goto 2}/g'}${color}${font}
+#****************
+# PROCESOR
+#****************
+${font sans-liberation:bold:size=8}${color5}P R O C E S S O R ${hr 2}${color grey}
+${color grey}CPU1: ${cpu cpu1}% ${cpubar cpu1}
+#CPU2: ${cpu cpu2}% ${cpubar cpu2}
+${font sans-serif:normal:size=8}${cpugraph cpu1}
+#${font sans-serif:bold:size=8}${color5}T O P   C P U   P R O C. ${hr 2}${color grey}
+${font sans-serif:normal:size=8}${top name 1}${alignr}${top cpu 1}% 
+${top name 2}${alignr}${top cpu 2}% 
+$font${top name 3}${alignr}${top cpu 3}% 
+$font${top name 4}${alignr}${top cpu 4}% 
+#$font${top name 5}${alignr}${top cpu 5}% [${top pid 5}]
+#****************
+# RAM MEMORY
+#****************
+${font sans-serif:bold:size=8}${color5}M E M O R Y ${hr 2}${color grey}
+#${memgraph mem}
+${font sans-serif:normal:size=8}RAM $memperc% $membar
+#${font sans-serif:bold:size=8}${color5}T O P   M E M   P R O C. ${hr 2}${color grey}
+${font sans-serif:normal:size=8}${top_mem name 1}${alignr}${top mem 1}% 
+${top_mem name 2}${alignr}${top mem 2}% 
+$font${top_mem name 3}${alignr}${top mem 3}% 
+$font${top_mem name 4}${alignr}${top mem 4}% 
+#$font${top_mem name 5}${alignr}${top mem 5}%
+#****************
+# DISKs
+#****************
+${font sans-serif:bold:size=8}${color5}D I S K S ${hr 2}${color grey}
+${font sans-serif:normal:size=8}sda1 / ${fs_used_perc /}% ${fs_bar /}
+SWAP ${swapperc}% ${swapbar}
+#****************
+# NETWORK
+#****************
+${font sans-serif:bold:size=8}${color5}N E T W O R K ${hr 2}${color grey}
+${font sans-serif:normal:size=8}IP address: $alignr ${addr wlan0}
+ESSID: $alignr ${wireless_essid wlan0}
+Quality: ${wireless_link_qual_perc wlan0}% ${wireless_link_bar wlan0}
+${downspeedgraph wlan0}
+DnLd spd: ${downspeed wlan0}kb/s $alignr tot.: ${totaldown wlan0}
+${upspeedgraph wlan0}
+UpLd spd: ${upspeed wlan0}kb/s $alignr tot.: ${totalup wlan0}
+${font sans-serif:bold:size=8}${color5}S H O R T C U T    K E Y S ${hr 2}${color grey}
+${font sans-serif:normal:size=8}Alt+F2$alignr Run Dialog
+Alt+F3$alignr Alt Menu
+Super+Space$alignr Main Menu
+Super+Tab$alignr Client Menu
+Super+t$alignr Terminal
+Super+f$alignr File Manager
+Super+e$alignr Editor
+Super+m$alignr Media Player
+Super+w$alignr Web Browser
+Super+h$alignr Task Manager
+Super+l$alignr Lock Screen
+Super+v$alignr Volume Control
+Super+x$alignr Logout
+PrtSc$alignr Screenshot
