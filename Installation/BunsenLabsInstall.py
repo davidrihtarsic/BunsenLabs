@@ -280,7 +280,7 @@ Atom.shell_post_install_cmds = [
     'apm install markdown-table-editor',
     'apm install relative-numbers']
 Atom.auto_install = True
-Atom.notes = ''
+Atom.notes = '!! NASTAVITI JE POTREBNO: Settings -> Packages -> ide-python [Python executables: python3] !!!'
 vsi_programi.append(Atom)
 
 ## Thunderbird ####################################################
@@ -316,6 +316,20 @@ LinkDotFiles.shell_pre_install_cmds = ['/home/david/Files/GitHub_noSync/BunsenLa
 LinkDotFiles.auto_install = True
 vsi_programi.append(LinkDotFiles)
 
+# OpenBoxMenu ########################################################
+#OpenBoxMenu = NovProgram()
+#OpenBoxMenu.program_name = 'OpenBoxMenu'
+#OpenBoxMenu.category = 'System'
+#OpenBoxMenu.description = 'Make link for any files in ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/...'
+#OpenBoxMenu.shell_pre_install_cmds = [
+#        'mv ~/.config/openbox/menu.xml ~/.config/openbox/menu_original.xml',
+#        'cp ~/.config/openbox/menu_template.xml ~/.config/openbox/menu.xml',
+#        'sudo git clone https://github.com/woho/openbox-menu.git '+opt_dir+'openbox-menu',
+#        '/opt/openbox-menu/obmenu.py'
+#        ]
+#OpenBoxMenu.auto_install = True
+#vsi_programi.append(OpenBoxMenu)
+
 ## FreeCAD ####################################################
 FreeCAD = NovProgram()
 FreeCAD.program_name = 'FreeCAD'  # ime naj bo brez presledkov
@@ -341,6 +355,19 @@ Neofetch.shell_post_install_cmds = []
 Neofetch.auto_install = False
 Neofetch.notes = ''
 vsi_programi.append(Neofetch)
+
+## Rofi ####################################################
+Rofi = NovProgram()
+Rofi.program_name = 'Rofi'  # ime naj bo brez presledkov
+Rofi.category = 'Office'
+Rofi.description = 'Rofi is an email/news/chat clienth a possible RSS feed aggregation developed by Mozilla.'  # neko besedilo za opis
+Rofi.shell_pre_install_cmds = []
+Rofi.apt_get_install_cmds = [
+        'rofi']
+Rofi.shell_post_install_cmds = []
+Rofi.auto_install = True
+Rofi.notes = ''
+vsi_programi.append(Rofi)
 
 ## JGMENU ####################################################
 JGMENU = NovProgram()

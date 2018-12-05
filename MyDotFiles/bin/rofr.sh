@@ -32,9 +32,9 @@ while getopts ":hvqwcbrl" opt; do
             exit 0
             ;;
         r)
-            rofi -modi window,run,drun -show drun -line-padding 4 \
+            rofi -modi window,run,drun -show drun -line-padding 2 \
                 -columns 2 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "ArchLabs-Light"
+                -show-icons #-drun-icon-theme "ArchLabs-Light"
             ;;
         w)
             rofi -modi window -show window -hide-scrollbar \

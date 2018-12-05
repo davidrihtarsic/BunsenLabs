@@ -2,7 +2,7 @@
 
 OIFS="$IFS"
 IFS=$'\n'
-SOURCE=~/Files/GitHub_noSync/ArchLabs/MyDotFiles
+SOURCE=~/Files/GitHub_noSync/BunsenLabs/MyDotFiles
 SOURCE_LEN=${#SOURCE}
 
 DESTINATION=~
