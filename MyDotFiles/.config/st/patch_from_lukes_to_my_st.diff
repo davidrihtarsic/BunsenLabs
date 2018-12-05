@@ -1,0 +1,260 @@
+diff -u ./st-luke/config.h ./st-dave/config.h
+--- ./st-luke/config.h	2018-08-13 19:27:29.633133596 +0200
++++ ./st-dave/config.h	2018-08-13 19:19:35.511549743 +0200
+@@ -5,7 +5,7 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-static char *font = "mono:pixelsize=14:antialias=true:autohint=true";
++static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+ static int borderpx = 2;
+ 
+ /*
+@@ -83,29 +83,33 @@
+ unsigned int tabspaces = 8;
+ 
+ /* bg opacity */
+-unsigned int alpha = 0xed;
++unsigned int alpha = 0xd0;
+ 
++/* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+-	"#073642",  /*  0: black    */
+-	"#dc322f",  /*  1: red      */
+-	"#859900",  /*  2: green    */
+-	"#b58900",  /*  3: yellow   */
+-	"#268bd2",  /*  4: blue     */
+-	"#d33682",  /*  5: magenta  */
+-	"#2aa198",  /*  6: cyan     */
+-	"#eee8d5",  /*  7: white    */
+-	"#002b36",  /*  8: brblack  */
+-	"#cb4b16",  /*  9: brred    */
+-	"#586e75",  /* 10: brgreen  */
+-	"#657b83",  /* 11: bryellow */
+-	"#839496",  /* 12: brblue   */
+-	"#6c71c4",  /* 13: brmagenta*/
+-	"#93a1a1",  /* 14: brcyan   */
+-	"#fdf6e3",  /* 15: brwhite  */
++  "#282828",
++  "#CC241D",
++  "#98971A",
++  "#D79921",
++  "#458588",
++  "#B16286",
++  "#689D6A",
++  "#A89984",
++  "#928374",
++  "#FB4934",
++  "#B8BB26",
++  "#FABD2F",
++  "#83A598",
++  "#D3869B",
++  "#8EC07C",
++  "#EBDBB2",
++
++	[255] = 0,
++
+ 	/* more colors can be added after 255 to use with DefaultXX */
+-	"black",   /* 256 -> bg */
+-	"#00cc00", /* 257 -> fg */
+-    "magenta"  /* 258 -> cursor */
++	"#282828",
++	"#EBDBB2",
++	"#C5C8C6",
+ };
+ 
+ 
+@@ -113,11 +117,10 @@
+  * Default colors (colorname index)
+  * foreground, background, cursor, reverse cursor
+  */
+-unsigned int defaultfg = 12;
+-unsigned int defaultbg = 257;
+-static unsigned int defaultcs = 14;
+-static unsigned int defaultrcs = 15;
+-
++unsigned int defaultfg = 15;
++unsigned int defaultbg = 256;
++static unsigned int defaultcs = 258;
++static unsigned int defaultrcs = 257;
+ /*
+  * Default shape of cursor
+  * 2: Block ("█")
+@@ -151,6 +154,7 @@
+  * Xresources preferences to load at startup
+  */
+ ResourcePref resources[] = {
++				/*
+ 		{ "font",         STRING,  &font },
+ 		{ "color0",       STRING,  &colorname[0] },
+ 		{ "color1",       STRING,  &colorname[1] },
+@@ -180,8 +184,8 @@
+ 		{ "tabspaces",    INTEGER, &tabspaces },
+ 		{ "cwscale",      FLOAT,   &cwscale },
+ 		{ "chscale",      FLOAT,   &chscale },
++		*/
+ };
+-
+ /*
+  * Internal mouse shortcuts.
+  * Beware that overloading Button1 will disable the selection.
+@@ -208,9 +212,9 @@
+ 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
+ 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
+ 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
+-	{ MODKEY|ShiftMask,     XK_Prior,       zoom,           {.f = +1} },
+-	{ MODKEY|ShiftMask,     XK_Next,        zoom,           {.f = -1} },
+-	{ MODKEY|ShiftMask,     XK_Home,        zoomreset,      {.f =  0} },
++	{ MODKEY,     					XK_KP_Add,      zoom,           {.f = +1} },
++	{ MODKEY,     					XK_KP_Subtract, zoom,           {.f = -1} },
++	{ MODKEY,     					XK_Home,        zoomreset,      {.f =  0} },
+ 	{ ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
+ 	{ MODKEY|ShiftMask,     XK_Insert,      clippaste,      {.i =  0} },
+ 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
+@@ -221,18 +225,19 @@
+ 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+ 	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
+ 	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
+-	{ MODKEY,            	XK_k,  		kscrollup,      {.i =  1} },
+-	{ MODKEY,            	XK_j,   	kscrolldown,    {.i =  1} },
+-	{ MODKEY,            	XK_Up,  	kscrollup,      {.i =  1} },
+-	{ MODKEY,            	XK_Down,   	kscrolldown,    {.i =  1} },
+-	{ MODKEY,	        XK_u,		kscrollup,      {.i = -1} },
+-	{ MODKEY,  		XK_d,		kscrolldown,   	{.i = -1} },
+-	{ MODKEY|ShiftMask,     XK_Up,          zoom,           {.f = +1} },
+-	{ MODKEY|ShiftMask,     XK_Down,        zoom,           {.f = -1} },
+-	{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
++	{ MODKEY,            		XK_k,  					kscrollup,      {.i =  1} },
++	{ MODKEY,            		XK_j,   				kscrolldown,    {.i =  1} },
++	{ MODKEY,            		XK_Up,  				kscrollup,      {.i =  1} },
++	{ MODKEY,            		XK_Down,   			kscrolldown,    {.i =  1} },
++	{ MODKEY,	        			XK_u,						kscrollup,      {.i = -1} },
++	{ MODKEY,  							XK_d,						kscrolldown,   	{.i = -1} },
++  { MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
+ 	{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
+ 	{ MODKEY|ShiftMask,     XK_U,           zoom,           {.f = +2} },
+ 	{ MODKEY|ShiftMask,     XK_D,           zoom,           {.f = -2} },
++	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
++	{ MODKEY,               XK_o,           opencopied,     {.v = "xdg-open"} },
++	
+ };
+ 
+ /*
+Common subdirectories: ./st-luke/.git and ./st-dave/.git
+diff -u ./st-luke/st.c ./st-dave/st.c
+--- ./st-luke/st.c	2018-08-13 19:27:29.633133596 +0200
++++ ./st-dave/st.c	2018-08-13 18:59:58.346543062 +0200
+@@ -2683,3 +2683,67 @@
+ 	tfulldirt();
+ 	draw();
+ }
++
++
++/* select and copy the previous url on screen (do nothing if there's no url).
++ * known bug: doesn't handle urls that span multiple lines (wontfix)
++ * known bug: only finds first url on line (mightfix)
++ */
++void
++copyurl(const Arg *arg) {
++	/* () and [] can appear in urls, but excluding them here will reduce false
++	 * positives when figuring out where a given url ends.
++	 */
++	static char URLCHARS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
++		"abcdefghijklmnopqrstuvwxyz"
++		"0123456789-._~:/?#@!$&'*+,;=%";
++
++	int i, row, startrow;
++	char *linestr = calloc(sizeof(char), term.col+1); /* assume ascii */
++	char *c, *match = NULL;
++
++	row = (sel.ob.x >= 0 && sel.nb.y > 0) ? sel.nb.y-1 : term.bot;
++	LIMIT(row, term.top, term.bot);
++	startrow = row;
++
++	/* find the start of the last url before selection */
++	do {
++		for (i = 0; i < term.col; ++i) {
++			if (term.line[row][i].u > 127) /* assume ascii */
++				continue;
++			linestr[i] = term.line[row][i].u;
++		}
++		linestr[term.col] = '\0';
++		if ((match = strstr(linestr, "http://"))
++				|| (match = strstr(linestr, "https://")))
++			break;
++		if (--row < term.top)
++			row = term.bot;
++	} while (row != startrow);
++
++	if (match) {
++		/* must happen before trim */
++		selclear();
++		sel.ob.x = strlen(linestr) - strlen(match);
++
++		/* trim the rest of the line from the url match */
++		for (c = match; *c != '\0'; ++c)
++			if (!strchr(URLCHARS, *c)) {
++				*c = '\0';
++				break;
++			}
++
++		/* select and copy */
++		sel.mode = 1;
++		sel.type = SEL_REGULAR;
++		sel.oe.x = sel.ob.x + strlen(match)-1;
++		sel.ob.y = sel.oe.y = row;
++		selnormalize();
++		tsetdirt(sel.nb.y, sel.ne.y);
++		xsetsel(getsel());
++		xclipcopy();
++	}
++
++	free(linestr);
++}
++
+diff -u ./st-luke/st.h ./st-dave/st.h
+--- ./st-luke/st.h	2018-08-13 19:27:29.633133596 +0200
++++ ./st-dave/st.h	2018-08-13 19:21:40.211979033 +0200
+@@ -93,10 +93,12 @@
+ void draw(void);
+ 
+ void iso14755(const Arg *);
++void opencopied(const Arg *);
+ void printscreen(const Arg *);
+ void printsel(const Arg *);
+ void sendbreak(const Arg *);
+ void toggleprinter(const Arg *);
++void copyurl(const Arg *);
+ 
+ int tattrset(int);
+ void tnew(int, int);
+diff -u ./st-luke/x.c ./st-dave/x.c
+--- ./st-luke/x.c	2018-08-13 19:27:29.633133596 +0200
++++ ./st-dave/x.c	2018-08-13 19:23:18.032278737 +0200
+@@ -2088,3 +2088,26 @@
+ 
+ 	return 0;
+ }
++
++void
++opencopied(const Arg *arg)
++{
++	const size_t max_cmd = 2048;
++	const char *clip = xsel.clipboard;
++	if(!clip) {
++		fprintf(stderr, "Warning: nothing copied to clipboard\n");
++		return;
++	}
++
++	/* account for space/quote (3) and \0 (1) */
++	char cmd[max_cmd + strlen(clip) + 4];
++	strncpy(cmd, (char *)arg->v, max_cmd);
++	cmd[max_cmd] = '\0';
++
++	strcat(cmd, " \"");
++	strcat(cmd, clip);
++	strcat(cmd, "\"");
++
++	system(cmd);
++}
++

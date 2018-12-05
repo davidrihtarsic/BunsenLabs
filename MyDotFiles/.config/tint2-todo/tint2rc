@@ -1,0 +1,354 @@
+#-------------------------------------
+# Gradients
+#-------------------------------------
+# Backgrounds
+# Background 1: Active task
+rounded = 0
+border_width = 3
+border_sides = T
+background_color = #888888 0
+border_color = #1793d1 100
+background_color_hover = #888888 20
+border_color_hover = #1793d1 100
+background_color_pressed = #888888 20
+border_color_pressed = #1793d1 100
+
+# Background 2: Default task, Iconified task
+rounded = 0
+border_width = 0
+border_sides = TBLR
+background_color = #000000 0
+border_color = #000000 0
+background_color_hover = #888888 20
+border_color_hover = #888888 20
+background_color_pressed = #888888 20
+border_color_pressed = #888888 20
+
+# Background 3: Urgent task
+rounded = 0
+border_width = 3
+border_sides = T
+background_color = #888888 0
+border_color = #e64141 100
+background_color_hover = #888888 20
+border_color_hover = #e64141 100
+background_color_pressed = #888888 20
+border_color_pressed = #e64141 100
+
+# Background 4: Inactive desktop name, Inactive taskbar
+rounded = 0
+border_width = 0
+border_sides = LR
+background_color = #2b303b 80
+border_color = #000000 0
+background_color_hover = #888888 20
+border_color_hover = #000000 0
+background_color_pressed = #888888 20
+border_color_pressed = #000000 0
+
+# Background 5: Active desktop name, Active taskbar, Battery, Button, Clock, Launcher, Systray
+rounded = 0
+border_width = 0
+border_sides = LR
+background_color = #2b303b 90
+border_color = #d8d8d8 0
+background_color_hover = #d8d8d8 0
+border_color_hover = #d8d8d8 0
+background_color_pressed = #d8d8d8 0
+border_color_pressed = #d8d8d8 0
+
+# Background 6: Tooltip
+rounded = 0
+border_width = 0
+border_sides = TBLR
+background_color = #2b303b 100
+border_color = #222222 90
+background_color_hover = #2b303b 100
+border_color_hover = #222222 90
+background_color_pressed = #2b303b 100
+border_color_pressed = #222222 90
+
+#-------------------------------------
+# Panel
+panel_items = PL:T:EEEEEEEE:C
+panel_size = 100% 22
+panel_margin = 0 0
+panel_padding = 0 0 0
+panel_background_id = 0
+wm_menu = 1
+panel_dock = 0
+panel_position = top center horizontal
+panel_layer = bottom
+panel_monitor = all
+panel_shrink = 0
+autohide = 0
+autohide_show_timeout = 0.3
+autohide_hide_timeout = 1.5
+autohide_height = 6
+strut_policy = follow_size
+panel_window_name = tint2
+disable_transparency = 0
+mouse_effects = 1
+font_shadow = 0
+mouse_hover_icon_asb = 100 0 10
+mouse_pressed_icon_asb = 100 0 0
+
+#-------------------------------------
+# Taskbar
+taskbar_mode = multi_desktop
+taskbar_hide_if_empty = 1
+taskbar_padding = 0 0 0
+taskbar_background_id = 4
+taskbar_active_background_id = 5
+taskbar_name = 0
+taskbar_hide_inactive_tasks = 0
+taskbar_hide_different_monitor = 1
+taskbar_hide_different_desktop = 0
+taskbar_always_show_all_desktop_tasks = 0
+taskbar_name_padding = 4 4
+taskbar_name_background_id = 0
+taskbar_name_active_background_id = 0
+taskbar_name_font = Ubuntu 10
+taskbar_name_font_color = #828282 100
+taskbar_name_active_font_color = #a0a0bd 100
+taskbar_distribute_size = 0
+taskbar_sort_order = none
+task_align = left
+
+#-------------------------------------
+# Task
+task_text = 0
+task_icon = 1
+task_centered = 1
+urgent_nb_of_blink = 20
+task_maximum_size = 36 30
+task_padding = 6 2 4
+task_font = Ubuntu 10
+task_tooltip = 1
+task_font_color = #828282 60
+task_active_font_color = #828282 100
+task_urgent_font_color = #ffffff 100
+task_iconified_font_color = #d8d8d8 60
+task_icon_asb = 80 0 0
+task_active_icon_asb = 100 0 0
+task_urgent_icon_asb = 100 0 0
+task_iconified_icon_asb = 80 0 0
+task_background_id = 2
+task_active_background_id = 1
+task_urgent_background_id = 3
+task_iconified_background_id = 2
+mouse_left = toggle_iconify
+mouse_middle = close
+mouse_right = none
+mouse_scroll_up = toggle
+mouse_scroll_down = iconify
+
+#-------------------------------------
+# System tray (notification area)
+systray_padding = 8 2 4
+systray_background_id = 5
+systray_sort = right2left
+systray_icon_size = 16
+systray_icon_asb = 100 0 0
+systray_monitor = 1
+systray_name_filter =
+
+#-------------------------------------
+# Launcher
+launcher_padding = 5 0 5
+launcher_background_id = 5
+launcher_icon_background_id = 0
+launcher_icon_size = 24
+launcher_icon_asb = 100 0 0
+launcher_icon_theme_override = 0
+startup_notifications = 1
+launcher_tooltip = 1
+launcher_item_app = /usr/share/applications/exo-file-manager.desktop
+launcher_item_app = /usr/share/applications/exo-web-browser.desktop
+launcher_item_app = /usr/share/applications/thunderbird.desktop
+launcher_item_app = /usr/share/applications/exo-terminal-emulator.desktop
+launcher_item_app = /usr/share/applications/sublime_text_3.desktop
+
+#-------------------------------------
+# Clock 🕒 ⏳ 
+time1_format =|%d.%m.%y|⌚%H:%M
+time2_format =
+time1_font = Ubuntu 10
+time1_timezone =
+time2_timezone =
+time2_font = Ubuntu Light 0
+clock_font_color = #ffffff 100
+clock_padding = 10 4
+clock_background_id = 5
+clock_tooltip =
+clock_tooltip_timezone =
+clock_lclick_command = gsimplecal
+clock_rclick_command = gsimplecal
+clock_mclick_command =
+clock_uwheel_command =
+clock_dwheel_command =
+
+#-------------------------------------
+# Battery
+battery_tooltip = 1
+battery_low_status = 20
+battery_low_cmd = notify-send "Battery Low"
+battery_full_cmd =
+bat0_font = Ubuntu 11
+bat2_font = Ubuntu 0
+battery_font_color = #b5b5b5 100
+bat0_format =
+bat2_format =
+battery_padding = 4 2
+battery_background_id = 5
+battery_hide = 101
+battery_lclick_command = xfce4-power-manager-settings
+battery_rclick_command = xfce4-power-manager-settings
+battery_mclick_command =
+battery_uwheel_command =
+battery_dwheel_command =
+ac_connected_cmd =
+ac_disconnected_cmd =
+
+#-------------------------------------
+# Button 1
+button = new
+button_icon = /usr/share/icons/ArchLabs-Dark/32x32/places/distributor-logo-archlabs.png
+button_text =
+button_lclick_command= jgmenu_run
+button_rclick_command= exo-open ~/.config/jgmenu/jgmenurc
+button_mclick_command=
+button_uwheel_command=
+button_dwheel_command=
+button_font_color = #000000 100
+button_padding = 8 2
+button_background_id = 5
+button_centered = 1
+button_max_icon_size = 22
+
+#-------------------------------------
+# Tooltip
+tooltip_show_timeout = 0
+tooltip_hide_timeout = 0
+tooltip_padding = 10 6
+tooltip_background_id = 6
+tooltip_font_color = #d8d8d8 100
+tooltip_font = Ubuntu 10
+
+#-------------------------------------
+# Edited: David Rihtaršič
+# Date : 2018-03-02
+# 
+# References:
+# - [Tint2 documentation](https://gitlab.com/o9000/tint2/blob/master/doc/tint2.md)
+# - [special characters](http://panmental.de/symbols/info.htm)
+# - [unicode table](https://unicode-table.com/en/#geometric-shapes)
+
+#-------------------------------------
+# e1
+# Upgrade linux packages
+execp = new
+execp_command = updates=$(checkupdates | wc -l); printf "|$updates"
+execp_lclick_command = terminator --command=pacli & disown
+execp_font = Ubuntu 10
+execp_tooltip = Run Package updater...
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = 3600
+execp_continuous = 0
+
+#-------------------------------------
+# Dropbox
+execp = new
+execp_command = drop_sync=$(dropbox-cli filestatus /home/mija/Dropbox); if [[ "$drop_sync" = *"up to date"* ]]; then printf "| [✔] ";elif [[ "$drop_sync" = *"syncing"* ]]; then printf "| [♻] ";else printf "| [✘] ";fi
+execp_lclick_command = dropbox_status=$(dropbox-cli status);notify-send "Dropbox: $dropbox_status"
+execp_font = Ubuntu 10
+execp_tooltip = Dropbox
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = 3
+execp_continuous = 0
+
+#-------------------------------------
+# e2
+# CPU
+# ▁ ▂ ▃ ▄ ▅ ▆ ▇
+execp = new
+execp_command = temp=$(sensors | awk '/Core 0:/ { print $3 }');temp=${temp:1:-2};usage=$(top -bn 2 -d 0.01 | grep '^%Cpu' | tail -n 1 | gawk '{print $2+$4+$6}');printf  "|%.0f%% |%.0f°C" $usage $temp
+execp_font = Ubuntu 10
+execp_tooltip = Run HTOP...
+execp_lclick_command = terminator --command=htop & disown
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = 5
+execp_continuous = 0
+
+#-------------------------------------
+# e3
+# Memory RAM free
+execp = new
+execp_command = free_ram=$(free |awk '/Mem:/ {print $3/$2*100}');printf "|%.0f%%" $free_ram
+execp_font = Ubuntu 10
+execp_tooltip = Run HTOP...
+execp_lclick_command = terminator --command=htop & disown
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = 5
+execp_continuous = 0
+
+#-------------------------------------
+# e4
+# Sound
+execp = new
+execp_command = vol=$(pamixer --get-volume);mute=$(pamixer --get-mute);if [ "$mute" = "true" ]; then printf "|muted"; else printf "|%.0f%%" $vol; fi
+execp_font = Ubuntu 10
+execp_tooltip = L click = mute \nR click = Volume setup... 
+execp_lclick_command = pamixer -t
+execp_rclick_command = pavucontrol &
+execp_uwheel_command = pamixer -i 1
+execp_dwheel_command = pamixer -d 1
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = None
+execp_continuous = 0
+
+#-------------------------------------
+# e5
+# Ethernet
+execp = new
+execp_command = printf "|"; ip=$(nmcli | awk '/inet4/ { print $2 }');trim_ip=${ip:0:-3}; printf $trim_ip
+execp_font = Ubuntu 10
+execp_tooltip = 
+execp_lclick_command = networkmanager_dmenu &
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = 5
+execp_continuous = 0
+
+#-------------------------------------
+# e6
+# Battery 
+#      
+execp = new
+execp_command = bat_stat=$(cat /sys/class/power_supply/BAT0/status);bat_cap=$(cat /sys/class/power_supply/BAT0/capacity);if [ "$bat_stat" = "Charging" ]; then printf "|"; else printf "|";fi; printf "$bat_cap%%" 
+execp_font = Ubuntu 10
+execp_tooltip = 
+execp_lclick_command = xfce4-power-manager -c
+execp_font_color = #ffffff 100
+execp_background_id = 6
+execp_interval = 5
+execp_continuous = 0
+
+#-------------------------------------
+# e7
+# to-do
+# Weather
+# curl -s wttr.in/Begunje\?QT0
+# 🌞 🌤 ⛅ 🌥
+# ☂ ☔ 🌂 🌦 🌧 🌨 🌩 ⛈
+# ❄ ❅ ❆ 🎐 ☃ ⛄
+# 🌪 🌀 ☇ ☈ ☁ 🌫 🌁 🌈 🌬
+# Sound
+# 🔇 no sound 🔈 sound down 🔉 sound up 🔊
+# Brightness
+# 🔅 🔆

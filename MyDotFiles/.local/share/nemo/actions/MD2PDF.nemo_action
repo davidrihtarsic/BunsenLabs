@@ -1,0 +1,16 @@
+[Nemo Action]
+Name=MD-->PDF
+Comment=Transform MD to PDF with PanDoc
+
+Icon-Name=text-x-markdown
+Selection=s
+Extensions=md
+
+#Exec=printf "[u]=%u\n[U]=%U\n[f]=%f\n[F]=%F\n\n[N]=%N\n[p]=%p\n[P]=%P\n[d]=%d\n[D]=%D\n"
+#Exec=pandoc -o %P/%f.pdf --from markdown %F
+#Exec=pandoc --bibliography=%P/bibtex.bib -o %P/%f.pdf --from markdown --template eisvogel --listings --pdf-engine=xelatex %P/%f
+Exec=pandoc -o %P/%f.pdf --from markdown --template eisvogel --filter pandoc-eqnos --listings -V lang=sl --pdf-engine=xelatex %P/%f
+#Exec=pandoc -o %P/%f.pdf --from markdown --filter pandoc-eqnos --listings -V documentclass=book -V lang=sl --pdf-engine=xelatex %P/%f
+#Exec=pandoc -o %P/%f.pdf --from markdown --template eisvogel --listings --filter pandoc-citeproc --pdf-engine=xelatex %P/%f
+
+Quote=double

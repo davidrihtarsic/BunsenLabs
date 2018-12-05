@@ -1,0 +1,11 @@
+[Nemo Action]
+Name=PDE->extract
+Comment=Extract pdf to several pages...
+
+Icon-Name=masterpdfeditor3
+Selection=s
+Extensions=pdf
+Quote=double
+
+#Exec=printf "[u]=%u\n[U]=%U\n[f]=%f\n[F]=%F\n\n[N]=%N\n[p]=%p\n[P]=%P\n[d]=%d\n[D]=%D\n"
+Exec=pdftk %P/%f burst output %P/%f_pg_%03d.pdf

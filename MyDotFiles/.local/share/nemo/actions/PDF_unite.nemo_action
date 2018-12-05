@@ -1,0 +1,10 @@
+[Nemo Action]
+Name=PDF->merge
+Comment=Merge several PDF documents...
+
+Icon-Name=pdfchain
+Selection=m
+Extensions=pdf
+Quote=double
+#Exec=printf "%u\n%U\n%f\n%F\n\n%N\n%p\n%P\n%d\n%D\n"
+Exec=pdfunite %F %P/merged.pdf

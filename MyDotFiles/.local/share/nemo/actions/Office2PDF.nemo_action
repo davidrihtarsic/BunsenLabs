@@ -1,0 +1,10 @@
+[Nemo Action]
+Name=Office-->PDF
+Comment=Expotr (Libre)Office doc to PDF
+
+Icon-Name=application-pdf.svg
+Selection=Any
+Extensions=odt;ods;odp;doc;xls;ppt;docx;xlsx;pptx
+Quote=double
+#Exec=printf "[u]=%u\n[U]=%U\n[f]=%f\n[F]=%F\n\n[N]=%N\n[p]=%p\n[P]=%P\n[d]=%d\n[D]=%D\n"
+Exec=soffice  --headless --convert-to pdf --outdir %P %F

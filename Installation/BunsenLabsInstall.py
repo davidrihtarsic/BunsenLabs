@@ -32,12 +32,29 @@ class NovProgram(object):
         self.index = 0
         self.category = ''
         self.description = ''
+        self.notes = ''
+        # instalation variables---------------
         self.shell_pre_install_cmds = []
         self.apt_get_install_cmds = []
+        self.deb_package_path = ''
+        self.deb_package_file = ''
+        self.deb_package_path_32 = ''
+        self.deb_package_file_32 = ''
+        self.deb_package_path_64 = ''
+        self.deb_package_file_64 = ''
         self.shell_post_install_cmds = []
         self.check_version_cmd = ''
-        self.notes = ''
         self.auto_install = False
+
+        self.arhitecture_64bit = False
+        self.arhitecture_32bit = False
+        self.arhitecture_bit_num = 0
+        if sys.maxsize > 2**32 :
+            self.arhitecture_64bit = True
+            self.arhitecture_bit_num = 64
+        else:
+            self.arhitecture_32bit = True
+            self.arhitecture_bit_num = 32
 
     def apt_get_install(self):
         # install from terminal command
@@ -76,6 +93,54 @@ class NovProgram(object):
                     key = input(thisAppOutput+'Execute: '+shell_cmd + confirmText)
                 if key == 'y':
                     os.system(shell_cmd)
+
+    def install_DEB_package(self):
+        ## Install form DEB package ###################################################
+	#if self.deb_package_file != '':
+        if (self.deb_package_file !='' or
+        (self.deb_package_file_64 != '' and self.arhitecture_64bit ) or
+        (self.deb_package_file_32 != '' and self.arhitecture_32bit )):
+		#Najprej poglejmo kaksno arhitekturo imamo
+            if (self.deb_package_file_64 != '' and self.arhitecture_64bit ):
+                sys.stdout.write(thisAppOutput+'Kaze, da imate 64bit arhitekturo...'+escapeColorDefault+'\n')
+                temp_deb_package_path = self.deb_package_path_64
+                temp_deb_package_file = self.deb_package_file_64
+            elif (self.deb_package_file_32 != '' and self.arhitecture_32bit):
+                sys.stdout.write(thisAppOutput+'Kaze, da imate 32bit arhitekturo...'+escapeColorDefault+'\n')
+                temp_deb_package_path = self.deb_package_path_32
+                temp_deb_package_file = self.deb_package_file_32
+            else:
+                sys.stdout.write(thisAppOutput+'Ne glede na arhitekturo...'+escapeColorDefault+'\n')
+                temp_deb_package_path = self.deb_package_path
+                temp_deb_package_file = self.deb_package_file
+		#-------------------------------------------------
+           #ce je vpisan deb paket potem ...
+           #najprej preveri, ce ga slucajno ze imamo v Downloadu...
+           #ce ne pojdi na internet...
+            if not os.path.isfile(download_dir+temp_deb_package_file):
+                #ce file ne obstaja gremo gledat na internet...
+                sys.stdout.write(thisAppOutput+'Preverjam DEB package...'+escapeColorDefault+'\n')
+                os.system('wget --spider -v '+temp_deb_package_path+temp_deb_package_file)
+                key = input(thisAppOutput+'Prenesi v '+download_dir+ confirmText)
+                if key == 'y':
+                    os.system('wget '+ temp_deb_package_path + temp_deb_package_file + ' --directory-prefix='+download_dir )
+            #pokazi direktorij Download
+            if os.path.isfile(download_dir+temp_deb_package_file):
+                sys.stdout.write(thisAppOutput+'Nasel:'+escapeColorDefault+'\n')
+                os.system('ls -all ' + download_dir + ' | grep ' + temp_deb_package_file)
+                key = input(thisAppOutput+'Namesti DEB package: ' + temp_deb_package_file + confirmText)
+                if key == 'y':
+                    os.system('sudo dpkg -i ' + download_dir + temp_deb_package_file)
+                    sys.stdout.write(thisAppOutput+'Namestitev koncana...'+escapeColorDefault+'\n')
+                key = input(thisAppOutput+'Izbrisi datoteko:'
+                    + download_dir + temp_deb_package_file+'*'
+                    + confirmText)
+                if key == 'y':
+                    os.system('rm -v ' + download_dir + temp_deb_package_file)
+                    #sys.stdout.write(thisAppOutput+'Izprisano:'+escapeColorDefault+'\n')
+                    #os.system('ls -all ' + download_dir)
+            else:
+                sys.stdout.write(thisAppOutput+'Paketa: '+ temp_deb_package_file +' nismo nasli...'+escapeColorDefault+'\n')
 
     def version_check(self):
         # KONEC INSTALACIJE samo se navodila in verzija check! ########################
@@ -137,6 +202,7 @@ class NovProgram(object):
         #self.arch_yaourt_install()
         self.shell_pre_install_cmd()
         self.apt_get_install()
+        self.install_DEB_package()
         self.shell_post_install_cmd()
         #self.arch_run_zsh_cmds()
         self.show_notes()
@@ -192,6 +258,31 @@ VIM.notes = ''
 VIM.auto_install = True
 vsi_programi.append(VIM)
 
+## Atom ####################################################
+Atom = NovProgram()
+Atom.program_name = 'Atom'  # ime naj bo brez presledkov
+Atom.category = 'Office'
+Atom.description = 'A hackable text editor for the 21st Century.'  # neko besedilo za opis
+Atom.shell_pre_install_cmds = []
+Atom.apt_get_install_cmds = []
+Atom.deb_package_path_64 ='https://atom-installer.github.com/v1.33.0/'
+Atom.deb_package_file_64 ='atom-amd64.deb'
+Atom.shell_post_install_cmds = [
+    'sudo apt --fix-broken install',
+    'sudo apt install python3-pip',
+    'sudo python3 -m pip install "python-language-server[all]"',
+    'apm install ide-python',
+    'apm install atom-ide-ui',
+    'apm install symbols-tree-view',
+    'apm install vim-mode',
+    'apm install script',
+    'apm install language-markdown',
+    'apm install markdown-table-editor',
+    'apm install relative-numbers']
+Atom.auto_install = True
+Atom.notes = ''
+vsi_programi.append(Atom)
+
 ## Thunderbird ####################################################
 Thunderbird = NovProgram()
 Thunderbird.program_name = 'Thunderbird'  # ime naj bo brez presledkov
@@ -216,7 +307,6 @@ RANGER.shell_pre_install_cmds = [
 RANGER.notes = ''
 vsi_programi.append(RANGER)
 
-
 # LinkDotFiles ########################################################
 LinkDotFiles = NovProgram()
 LinkDotFiles.program_name = 'LinkDotFiles'
@@ -239,6 +329,19 @@ FreeCAD.auto_install = True
 FreeCAD.notes = ''
 vsi_programi.append(FreeCAD)
 
+## Neofetch ####################################################
+Neofetch = NovProgram()
+Neofetch.program_name = 'Neofetch'  # ime naj bo brez presledkov
+Neofetch.category = 'Other'
+Neofetch.description = 'Neoftech is a cross-platform and easy-to-use system information command line script that collects your Linux system information and display it on the terminal next to an image, it could be your distributions logo or any ascii art of your choice.'  # neko besedilo za opis
+Neofetch.shell_pre_install_cmds = []
+Neofetch.apt_get_install_cmds = [
+        'neofetch']
+Neofetch.shell_post_install_cmds = []
+Neofetch.auto_install = False
+Neofetch.notes = ''
+vsi_programi.append(Neofetch)
+
 ## JGMENU ####################################################
 JGMENU = NovProgram()
 JGMENU.program_name = 'JGMENU'  # ime naj bo brez presledkov
@@ -252,7 +355,6 @@ JGMENU.shell_pre_install_cmds = [
 JGMENU.notes = ''
 vsi_programi.append(JGMENU)
 
-
 ## FEH ####################################################
 FEH = NovProgram()
 FEH.program_name = 'FEH'  # ime naj bo brez presledkov
@@ -261,8 +363,6 @@ FEH.description = 'System status'  # neko besedilo za opis
 FEH.apt_get_install_cmds = ['feh']
 FEH.notes = ''
 vsi_programi.append(FEH)
-
-
 
 ## NERDFONT ####################################################
 NERDFONT = NovProgram()
