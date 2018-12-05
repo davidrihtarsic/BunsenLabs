@@ -55,22 +55,6 @@ class NovProgram(object):
                     if key == 'y':
                         os.system('sudo apt-get install '+apt_cmd)
 
-    def arch_pacman_install(self):
-        # install from terminal pacman command
-        if len(self.arch_pacman_cmds) != 0:
-            for pacman_install in self.arch_pacman_cmds:
-                if self.auto_install:
-                    if self.version_check():
-                        # it is alredy installed... skip it!
-                        pass
-                    else:
-                        # it is not installed... install it!
-                        os.system('sudo pacman -S --noconfirm ' + pacman_install)
-                else:
-                    key = input(thisAppOutput+'Install with PACMAN: '+pacman_install + confirmText)
-                    if key == 'y':
-                        os.system('sudo pacman -S ' + pacman_install)
-
     def shell_pre_install_cmd(self):
         # Post INSTALL operations #####################################################
         if len(self.shell_pre_install_cmds) != 0:
@@ -167,7 +151,7 @@ GIT.description = 'Protokol za skrbno spremljanje verzij'\
                 'razvojnih programov.'  # neko besedilo za opis
 GIT.apt_get_install_cmds = ['git']
 GIT.notes = ''
-GIT.arch_zsh_cmds = [
+GIT.shell_post_install_cmds = [
     'git config --global user.email "david.rihtarsic@gmail.com"',
     'git config --global user.name "davidrihtarsic"',
     'git clone https://github.com/davidrihtarsic/Arduino-Data-Acquisition-Device.git ~/Files/GitHub_noSync/Arduino-Data-Acquisition-Device',
@@ -175,7 +159,7 @@ GIT.arch_zsh_cmds = [
     'git clone https://github.com/davidrihtarsic/InstallMyApps.git ~/Files/GitHub_noSync/InstallMyApps',
     'git clone https://github.com/davidrihtarsic/myLinuxNotes.git ~/Files/GitHub_noSync/myLinuxNotes',
     'git clone https://github.com/davidrihtarsic/Korad3005p.git ~/Files/GitHub_noSync/Korad3005p',
-    'git clone https://github.com/davidrihtarsic/BunsenLab.git ~/Files/GitHub_noSync/BunsenLab',
+    'git clone https://github.com/davidrihtarsic/BunsenLab.git ~/Files/GitHub_noSync/BunsenLabs',
     'git clone https://github.com/davidrihtarsic/RobDuino.git ~/Files/GitHub_noSync/RobDuino',
     'git clone https://github.com/davidrihtarsic/ArduinoCNC-DCmotors.git ~/Files/GitHub_noSync/CNC-ArduinoDCmotors']
 GIT.auto_install = True
@@ -194,10 +178,71 @@ OH_MY_ZSH.shell_pre_install_cmds = [
 OH_MY_ZSH.notes = ''
 vsi_programi.append(OH_MY_ZSH)
 
+## VIM ####################################################
+VIM = NovProgram()
+VIM.program_name = 'vim'  # ime naj bo brez presledkov
+VIM.category = 'Development'
+VIM.description = 'VIM like file manager.'  # neko besedilo za opis
+VIM.apt_get_install_cmds = ['vim-nox']
+VIM.shell_post_install_cmds = [
+	'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
+	'sudo apt-get install exuberant-ctags',
+    'sudo apt-get font-symbola']
+VIM.notes = ''
+VIM.auto_install = True
+vsi_programi.append(VIM)
+
+## Thunderbird ####################################################
+Thunderbird = NovProgram()
+Thunderbird.program_name = 'Thunderbird'  # ime naj bo brez presledkov
+Thunderbird.category = 'Office'
+Thunderbird.description = 'Thunderbird is an email/news/chat clienth a possible RSS feed aggregation developed by Mozilla.'  # neko besedilo za opis
+Thunderbird.shell_pre_install_cmds = []
+Thunderbird.apt_get_install_cmds = [
+        'thunderbird']
+Thunderbird.shell_post_install_cmds = []
+Thunderbird.auto_install = True
+Thunderbird.notes = ''
+vsi_programi.append(Thunderbird)
+
+## RANGER ####################################################
+RANGER = NovProgram()
+RANGER.program_name = 'ranger'  # ime naj bo brez presledkov
+RANGER.category = 'System'
+RANGER.description = 'System status'  # neko besedilo za opis
+RANGER.shell_pre_install_cmds = [
+        'git clone https://github.com/ranger/ranger.git ~/Downloads/ranger',
+        'cd ~/Downloads/ranger && sudo make install']
+RANGER.notes = ''
+vsi_programi.append(RANGER)
+
+
+# LinkDotFiles ########################################################
+LinkDotFiles = NovProgram()
+LinkDotFiles.program_name = 'LinkDotFiles'
+LinkDotFiles.category = 'System'
+LinkDotFiles.description = 'Make link for any files in ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/...'
+LinkDotFiles.shell_pre_install_cmds = ['/home/david/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/system/makeSymbolicLinks.sh']
+LinkDotFiles.auto_install = True
+vsi_programi.append(LinkDotFiles)
+
+## FreeCAD ####################################################
+FreeCAD = NovProgram()
+FreeCAD.program_name = 'FreeCAD'  # ime naj bo brez presledkov
+FreeCAD.category = 'Graphics'
+FreeCAD.description = 'FreeCAD is an open-source parametric 3D modeler made primarily to design real-life objects of any size. Parametric modeling allows you to easily modify your design by going back into your model history and changing its parameters.'  # neko besedilo za opis
+FreeCAD.shell_pre_install_cmds = []
+FreeCAD.apt_get_install_cmds = [
+        'freecad']
+FreeCAD.shell_post_install_cmds = []
+FreeCAD.auto_install = True
+FreeCAD.notes = ''
+vsi_programi.append(FreeCAD)
+
 ## JGMENU ####################################################
 JGMENU = NovProgram()
 JGMENU.program_name = 'JGMENU'  # ime naj bo brez presledkov
-JGMENU.category = 'Development'
+JGMENU.category = 'Other'
 JGMENU.description = 'System status'  # neko besedilo za opis
 JGMENU.shell_pre_install_cmds = [
         'git clone https://github.com/johanmalm/jgmenu.git ~/Downloads/jgmenu',
@@ -211,30 +256,18 @@ vsi_programi.append(JGMENU)
 ## FEH ####################################################
 FEH = NovProgram()
 FEH.program_name = 'FEH'  # ime naj bo brez presledkov
-FEH.category = 'Development'
+FEH.category = 'Other'
 FEH.description = 'System status'  # neko besedilo za opis
 FEH.apt_get_install_cmds = ['feh']
 FEH.notes = ''
 vsi_programi.append(FEH)
 
 
-## VIM ####################################################
-VIM = NovProgram()
-VIM.program_name = 'vim'  # ime naj bo brez presledkov
-VIM.category = 'Development'
-VIM.description = 'VIM like file manager.'  # neko besedilo za opis
-VIM.apt_get_install_cmds = ['vim-nox']
-VIM.shell_post_install_cmds = [
-	'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
-	'sudo apt-get install exuberant-ctags',
-        'sudo apt-get font-symbola']
-VIM.notes = ''
-vsi_programi.append(VIM)
 
 ## NERDFONT ####################################################
 NERDFONT = NovProgram()
 NERDFONT.program_name = 'NERDFONT'  # ime naj bo brez presledkov
-NERDFONT.category = 'Development'
+NERDFONT.category = 'Other'
 NERDFONT.description = 'NERD-FONT like file manager.'  # neko besedilo za opis
 NERDFONT.apt_get_install_cmds = []
 NERDFONT.shell_post_install_cmds = [
@@ -245,21 +278,11 @@ NERDFONT.notes = ''
 vsi_programi.append(NERDFONT)
 
 
-## RANGER ####################################################
-RANGER = NovProgram()
-RANGER.program_name = 'ranger'  # ime naj bo brez presledkov
-RANGER.category = 'Development'
-RANGER.description = 'System status'  # neko besedilo za opis
-RANGER.shell_pre_install_cmds = [
-        'git clone https://github.com/ranger/ranger.git ~/Downloads/ranger',
-        'cd ~/Downloads/ranger && sudo make install']
-RANGER.notes = ''
-vsi_programi.append(RANGER)
 
 ## I3 ####################################################
 I3 = NovProgram()
 I3.program_name = 'i3'  # ime naj bo brez presledkov
-I3.category = 'Development'
+I3.category = 'Other'
 I3.description = 'System status'  # neko besedilo za opis
 I3.shell_pre_install_cmds = [
         'sudo apt-get install i3 suckless-tools',
