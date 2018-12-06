@@ -303,7 +303,8 @@ RANGER.category = 'System'
 RANGER.description = 'System status'  # neko besedilo za opis
 RANGER.shell_pre_install_cmds = [
         'git clone https://github.com/ranger/ranger.git ~/Downloads/ranger',
-        'cd ~/Downloads/ranger && sudo make install']
+        'cd ~/Downloads/ranger && sudo make install',
+        'sudo apt-get install w3m-img']
 RANGER.notes = ''
 vsi_programi.append(RANGER)
 
