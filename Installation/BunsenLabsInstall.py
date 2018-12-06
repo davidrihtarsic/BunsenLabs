@@ -414,7 +414,8 @@ I3.description = 'System status'  # neko besedilo za opis
 I3.shell_pre_install_cmds = [
         'sudo apt-get install i3 suckless-tools',
         'sudo apt-get install i3block',
-        'git clone https://github.com/vivien/i3blocks-contrib ~/.config/i3blocks'
+        'git clone https://github.com/vivien/i3blocks-contrib ~/.config/i3blocks',
+        'cd ~/.config/i3blocks && cp config.example config',
         'sudo apt install rofi']
 I3.notes = ''
 vsi_programi.append(I3)

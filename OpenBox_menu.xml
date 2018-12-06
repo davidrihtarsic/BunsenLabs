@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://openbox.org/
+                file:///usr/share/openbox/menu.xsd">
+
+    <menu id="exit-menu" label="Exit">
+        <item label="Log out">
+            <action name="Execute">
+                <command>
+                    bl-exit --logout
+                </command>
+            </action>
+        </item>
+        <item label="Suspend">
+            <action name="Execute">
+                <command>
+                    bl-exit --suspend
+                </command>
+            </action>
+        </item>
+        <item label="Reboot">
+            <action name="Execute">
+                <command>
+                    bl-exit --reboot
+                </command>
+            </action>
+        </item>
+        <item label="Power off">
+            <action name="Execute">
+                <command>
+                    bl-exit --poweroff
+                </command>
+            </action>
+        </item>
+    </menu>
+
+    <menu id="root-menu" label="Openbox 3"> 
+        <item label="Run Program">
+            <action name="Execute">
+                <command>
+                    gmrun
+                </command>
+            </action>
+        </item>
+        <separator/>
+<!-- BEGIN AUTOMENU -->
+<menu id="Utility" label="Accessories" icon="/usr/share/icons/gnome/22x22/categories/applications-accessories.png">    <item label="Archive Manager" icon="/usr/share/pixmaps/file-roller.xpm"><action name="execute"><execute>file-roller</execute></action></item>
+    <item label="BL CLI Editor" icon="/usr/share/icons/gnome/22x22/apps/accessories-text-editor.png"><action name="execute"><execute>bl-cli-editor</execute></action></item>
+    <item label="BL File Manager" icon="/usr/share/icons/gnome/22x22/apps/system-file-manager.png"><action name="execute"><execute>bl-file-manager</execute></action></item>
+    <item label="BL Text Editor" icon="/usr/share/icons/gnome/22x22/apps/accessories-text-editor.png"><action name="execute"><execute>bl-text-editor</execute></action></item>
+    <item label="Bulk Rename" icon="/usr/share/icons/hicolor/16x16/apps/Thunar.png"><action name="execute"><execute>/usr/lib/i386-linux-gnu/Thunar/ThunarBulkRename</execute></action></item>
+    <item label="Burn Image (xfburn)" icon="/usr/share/icons/gnome/22x22/devices/media-cdrom.png"><action name="execute"><execute>xfburn -i</execute></action></item>
+    <item label="Catfish File Search" icon="/usr/share/icons/Faenza/apps/96/catfish.png"><action name="execute"><execute>catfish</execute></action></item>
+    <item label="ClipIt" icon="/usr/share/icons/Faenza-Dark/status/24/clipit-trayicon.png"><action name="execute"><execute>clipit</execute></action></item>
+    <item label="Galculator" icon="/usr/share/pixmaps/galculator.xpm"><action name="execute"><execute>galculator</execute></action></item>
+    <item label="nitrogen" icon="/usr/share/icons/hicolor/22x22/apps/nitrogen.png"><action name="execute"><execute>nitrogen</execute></action></item>
+    <item label="Open a New Window" icon="/usr/share/pixmaps/terminator.png"><action name="execute"><execute>terminator</execute></action></item>
+    <item label="Open Folder with Thunar" icon="/usr/share/icons/hicolor/16x16/apps/Thunar.png"><action name="execute"><execute>thunar</execute></action></item>
+    <item label="Screenshot" icon="/usr/share/icons/hicolor/48x48/apps/applets-screenshooter.png"><action name="execute"><execute>xfce4-screenshooter</execute></action></item>
+    <item label="Terminal Emulator" icon="/usr/share/icons/gnome/22x22/apps/utilities-terminal.png"><action name="execute"><execute>exo-open --launch TerminalEmulator</execute></action></item>
+    <item label="Thunar File Manager" icon="/usr/share/icons/hicolor/16x16/apps/Thunar.png"><action name="execute"><execute>thunar</execute></action></item>
+    <item label="Vim" icon="/usr/share/icons/hicolor/16x16/apps/vim.png"><action name="execute"><execute>vim</execute></action></item>
+    <item label="X Terminal Emulator" icon="/usr/share/icons/gnome/22x22/apps/utilities-terminal.png"><action name="execute"><execute>x-terminal-emulator</execute></action></item>
+</menu>
+<menu id="Development" label="Development" icon="/usr/share/icons/gnome/22x22/categories/applications-development.png">    <item label="Arduino IDE" icon="/opt/arduino-nightly/lib/icons/64x64/apps/arduino.png"><action name="execute"><execute>/opt/arduino-nightly/arduino</execute></action></item>
+    <item label="BL CLI Editor" icon="/usr/share/icons/gnome/22x22/apps/accessories-text-editor.png"><action name="execute"><execute>bl-cli-editor</execute></action></item>
+    <item label="BL Text Editor" icon="/usr/share/icons/gnome/22x22/apps/accessories-text-editor.png"><action name="execute"><execute>bl-text-editor</execute></action></item>
+    <item label="Fritzing" icon="/opt/fritzing-0.9.3b/icons/fritzing_icon.png"><action name="execute"><execute>/opt/fritzing-0.9.3b/Fritzing</execute></action></item>
+    <item label="Geany" icon="/usr/share/pixmaps/geany.xpm"><action name="execute"><execute>geany</execute></action></item>
+    <item label="Icon Browser" icon="/usr/share/icons/hicolor/16x16/apps/yad.png"><action name="execute"><execute>yad-icon-browser</execute></action></item>
+    <item label="New File" icon="/usr/share/icons/hicolor/256x256/apps/sublime-text.png"><action name="execute"><execute>/opt/sublime_text/sublime_text --command new_file</execute></action></item>
+    <item label="Python (v2.7)" icon="/usr/share/pixmaps/python2.7.xpm"><action name="execute"><execute>/usr/bin/python2.7</execute></action></item>
+    <item label="Python (v3.4)" icon="/usr/share/pixmaps/python3.4.xpm"><action name="execute"><execute>/usr/bin/python3.4</execute></action></item>
+</menu>
+<menu id="Network" label="Network" icon="/usr/share/icons/hicolor/48x48/apps/applications-internet.png">    <item label="FileZilla" icon="/usr/share/pixmaps/filezilla.xpm"><action name="execute"><execute>filezilla</execute></action></item>
+    <item label="Firefox ESR" icon="/usr/share/pixmaps/firefox-esr.png"><action name="execute"><execute>/usr/lib/firefox-esr/firefox-esr</execute></action></item>
+    <item label="Mail Reader" icon="/usr/share/icons/Faenza/apps/96/internet-mail.png"><action name="execute"><execute>exo-open --launch MailReader</execute></action></item>
+    <item label="Open Safe Mode" icon="/usr/share/pixmaps/hexchat.xpm"><action name="execute"><execute>hexchat --no-auto --no-plugins</execute></action></item>
+    <item label="Start Transmission Minimized" icon="/usr/share/pixmaps/transmission.xpm"><action name="execute"><execute>transmission-gtk --minimized</execute></action></item>
+    <item label="Web Browser" icon="/usr/share/icons/gnome/22x22/apps/web-browser.png"><action name="execute"><execute>exo-open --launch WebBrowser</execute></action></item>
+    <item label="X Web Browser" icon="/usr/share/icons/hicolor/48x48/apps/applications-internet.png"><action name="execute"><execute>x-www-browser</execute></action></item>
+</menu>
+<menu id="Office" label="Office" icon="/usr/share/icons/gnome/22x22/categories/applications-office.png">    <item label="Document Viewer" icon="/usr/share/pixmaps/evince.xpm"><action name="execute"><execute>evince</execute></action></item>
+    <item label="Formula" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-startcenter.png"><action name="execute"><execute>libreoffice --math</execute></action></item>
+    <item label="Gnumeric" icon="/usr/share/icons/hicolor/22x22/apps/gnumeric.png"><action name="execute"><execute>gnumeric</execute></action></item>
+    <item label="New Database" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-base.png"><action name="execute"><execute>libreoffice --base</execute></action></item>
+    <item label="New Document" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-writer.png"><action name="execute"><execute>libreoffice --writer</execute></action></item>
+    <item label="New Drawing" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-draw.png"><action name="execute"><execute>libreoffice --draw</execute></action></item>
+    <item label="New Formula" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-math.png"><action name="execute"><execute>libreoffice --math</execute></action></item>
+    <item label="New Presentation" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-impress.png"><action name="execute"><execute>libreoffice --impress</execute></action></item>
+    <item label="New Spreadsheet" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-calc.png"><action name="execute"><execute>libreoffice --calc</execute></action></item>
+    <item label="Print Preview" icon="/usr/share/icons/Faenza-Darkest/actions/96/document-print-preview.png"><action name="execute"><execute>evince-previewer</execute></action></item>
+</menu>
+<menu id="Science" label="Science" icon="/usr/share/icons/gnome/22x22/categories/applications-science.png">    <item label="Fritzing" icon="/opt/fritzing-0.9.3b/icons/fritzing_icon.png"><action name="execute"><execute>/opt/fritzing-0.9.3b/Fritzing</execute></action></item>
+    <item label="Gnumeric" icon="/usr/share/icons/hicolor/22x22/apps/gnumeric.png"><action name="execute"><execute>gnumeric</execute></action></item>
+    <item label="New Formula" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-math.png"><action name="execute"><execute>libreoffice --math</execute></action></item>
+</menu>
+<menu id="Graphics" label="Graphics" icon="/usr/share/icons/gnome/22x22/categories/applications-graphics.png">    <item label="BL Image Viewer" icon="/usr/share/icons/gnome/22x22/categories/applications-graphics.png"><action name="execute"><execute>bl-image-viewer</execute></action></item>
+    <item label="Document Viewer" icon="/usr/share/pixmaps/evince.xpm"><action name="execute"><execute>evince</execute></action></item>
+    <item label="Feh" icon=""><action name="execute"><execute>feh</execute></action></item>
+    <item label="Mirage" icon="/usr/share/pixmaps/mirage.png"><action name="execute"><execute>mirage</execute></action></item>
+    <item label="New Drawing" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-draw.png"><action name="execute"><execute>libreoffice --draw</execute></action></item>
+    <item label="New Drawing" icon="/usr/share/icons/hicolor/256x256/apps/libreoffice-draw.png"><action name="execute"><execute>libreoffice --draw</execute></action></item>
+    <item label="Print Preview" icon="/usr/share/icons/Faenza-Darkest/actions/96/document-print-preview.png"><action name="execute"><execute>evince-previewer</execute></action></item>
+</menu>
+<menu id="AudioVideo" label="Multimedia" icon="/usr/share/icons/gnome/22x22/categories/applications-multimedia.png">    <item label="BL Media Player" icon="/usr/share/icons/hicolor/48x48/status/multimedia-player.png"><action name="execute"><execute>bl-media-player</execute></action></item>
+    <item label="Burn Image (xfburn)" icon="/usr/share/icons/gnome/22x22/devices/media-cdrom.png"><action name="execute"><execute>xfburn -i</execute></action></item>
+    <item label="PulseAudio Volume Control" icon="/usr/share/icons/gnome/22x22/apps/multimedia-volume-control.png"><action name="execute"><execute>pavucontrol</execute></action></item>
+    <item label="VLC media player" icon="/usr/share/icons/hicolor/256x256/apps/vlc.png"><action name="execute"><execute>/usr/bin/vlc --started-from-file</execute></action></item>
+</menu>
+<menu id="System" label="System" icon="/usr/share/icons/gnome/22x22/categories/applications-system.png">    <item label="Alternatives Configurator" icon="/usr/share/pixmaps/galternatives.png"><action name="execute"><execute>/usr/sbin/galternatives</execute></action></item>
+    <item label="BL File Manager" icon="/usr/share/icons/gnome/22x22/apps/system-file-manager.png"><action name="execute"><execute>bl-file-manager</execute></action></item>
+    <item label="Bulk Rename" icon="/usr/share/icons/hicolor/16x16/apps/Thunar.png"><action name="execute"><execute>/usr/lib/i386-linux-gnu/Thunar/ThunarBulkRename</execute></action></item>
+    <item label="GDebi Package Installer" icon="/usr/share/icons/gnome/22x22/mimetypes/gnome-mime-application-x-deb.png"><action name="execute"><execute>gdebi-gtk</execute></action></item>
+    <item label="Gigolo" icon="/usr/share/icons/gnome/22x22/places/gtk-network.png"><action name="execute"><execute>gigolo</execute></action></item>
+    <item label="GParted" icon="/usr/share/pixmaps/gparted.xpm"><action name="execute"><execute>gparted-pkexec</execute></action></item>
+    <item label="Htop" icon="/usr/share/pixmaps/htop.png"><action name="execute"><execute>htop</execute></action></item>
+    <item label="Open a New Window" icon="/usr/share/pixmaps/terminator.png"><action name="execute"><execute>terminator</execute></action></item>
+    <item label="Open Folder with Thunar" icon="/usr/share/icons/hicolor/16x16/apps/Thunar.png"><action name="execute"><execute>thunar</execute></action></item>
+    <item label="Root Terminal" icon="/usr/share/pixmaps/gksu-root-terminal.png"><action name="execute"><execute>gksu /usr/bin/x-terminal-emulator</execute></action></item>
+    <item label="Synaptic Package Manager" icon="/usr/share/pixmaps/synaptic.png"><action name="execute"><execute>synaptic-pkexec</execute></action></item>
+    <item label="System Profiler and Benchmark" icon="/usr/share/hardinfo/pixmaps/logo.png"><action name="execute"><execute>hardinfo</execute></action></item>
+    <item label="Thunar File Manager" icon="/usr/share/icons/hicolor/16x16/apps/Thunar.png"><action name="execute"><execute>thunar</execute></action></item>
+</menu>
+<menu id="Others" label="Others" icon="/usr/share/icons/hicolor/48x48/apps/applications-other.png"></menu>
+<menu id="Settings" label="Settings" icon="/usr/share/icons/gnome/22x22/categories/applications-utilities.png">    <item label="Alternatives Configurator" icon="/usr/share/pixmaps/galternatives.png"><action name="execute"><execute>/usr/sbin/galternatives</execute></action></item>
+    <item label="ARandR" icon="/usr/share/icons/gnome/22x22/devices/display.png"><action name="execute"><execute>arandr</execute></action></item>
+    <item label="Customize Look and Feel" icon="/usr/share/icons/gnome/22x22/apps/preferences-desktop-theme.png"><action name="execute"><execute>lxappearance</execute></action></item>
+    <item label="File Manager" icon="/usr/share/icons/gnome/22x22/apps/system-file-manager.png"><action name="execute"><execute>thunar-settings</execute></action></item>
+    <item label="GParted" icon="/usr/share/pixmaps/gparted.xpm"><action name="execute"><execute>gparted-pkexec</execute></action></item>
+    <item label="Network Connections" icon="/usr/share/icons/gnome/22x22/categories/preferences-system-network.png"><action name="execute"><execute>nm-connection-editor</execute></action></item>
+    <item label="Notifications" icon="/usr/share/icons/hicolor/48x48/apps/xfce4-notifyd.png"><action name="execute"><execute>xfce4-notifyd-config</execute></action></item>
+    <item label="Openbox Configuration Manager" icon="/usr/share/pixmaps/obconf.xpm"><action name="execute"><execute>obconf</execute></action></item>
+    <item label="openbox-menu" icon="/usr/share/pixmaps/openbox.xpm"><action name="execute"><execute>terminator -e /opt/openbox-menu/obmenu.py</execute></action></item>
+    <item label="OpenJDK Java 7 Policy Tool" icon="/usr/share/pixmaps/openjdk-7.xpm"><action name="execute"><execute>/usr/bin/policytool</execute></action></item>
+    <item label="Panel tint2" icon=""><action name="execute"><execute>tint2conf</execute></action></item>
+    <item label="Power Manager" icon="/usr/share/icons/Faenza-Dark/status/96/xfpm-ac-adapter.png"><action name="execute"><execute>xfce4-power-manager-settings</execute></action></item>
+    <item label="Preferred Applications" icon="/usr/share/icons/hicolor/48x48/apps/preferences-desktop-default-applications.png"><action name="execute"><execute>exo-preferred-applications</execute></action></item>
+    <item label="Removable Drives and Media" icon="/usr/share/icons/gnome/22x22/devices/drive-removable-media.png"><action name="execute"><execute>thunar-volman-settings</execute></action></item>
+    <item label="Synaptic Package Manager" icon="/usr/share/pixmaps/synaptic.png"><action name="execute"><execute>synaptic-pkexec</execute></action></item>
+</menu>
+<!-- END AUTOMENU -->
+        <separator/>
+        <menu id="BunsenLab" label="BunsenLab menu">
+            <item label="Terminal">
+                <action name="Execute">
+                    <command>
+                        x-terminal-emulator
+                    </command>
+                </action>
+            </item>
+            <item label="Web Browser">
+                <action name="Execute">
+                    <command>
+                        x-www-browser
+                    </command>
+                </action>
+            </item>
+            <item label="File Manager">
+                <action name="Execute">
+                    <command>
+                        bl-file-manager
+                    </command>
+                </action>
+            </item>
+            <item label="Text Editor">
+                <action name="Execute">
+                    <command>
+                        bl-text-editor
+                    </command>
+                </action>
+            </item>
+            <item label="Media Player">
+                <action>
+                    <command>
+                        bl-media-player
+                    </command>
+                </action>
+            </item>
+            <separator/>
+            <menu id="accessories" label="Accessories">
+                <item label="Catfish File Search">
+                    <action name="Execute">
+                        <command>
+                            catfish
+                        </command>
+                    </action>
+                </item>
+                <item label="Archive Manager">
+                    <action name="Execute">
+                        <command>
+                            file-roller
+                        </command>
+                    </action>
+                </item>
+                <item label="Task Manager (htop)">
+                    <action name="Execute">
+                        <command>x-terminal-emulator -T 'htop task manager' -e htop</command>
+                    </action>
+                </item>
+                <item label="BLOB Themes Manager">
+                    <action name="Execute">
+                        <command>
+                            bl-obthemes
+                        </command>
+                    </action>
+                </item>
+            </menu>
+            <menu execute="bl-graphics-pipemenu" id="bl-graphics-pipemenu" label="Graphics"/>
+            <menu execute="bl-multimedia-pipemenu" id="bl-multimedia-pipemenu" label="Multimedia"/>
+            <menu id="network" label="Network">
+                <menu execute="bl-x-www-browser-pipemenu" id="wwwbrowsers" label="WWW Browsers"/>
+                <item label="Filezilla FTP Client">
+                    <action name="Execute">
+                        <command>
+                            filezilla
+                        </command>
+                    </action>
+                </item>
+                <item label="Transmission BitTorrent Client">
+                    <action name="Execute">
+                        <command>
+                            transmission-gtk
+                        </command>
+                    </action>
+                </item>
+                <item label="HexChat IRC Client">
+                    <action name="Execute">
+                        <command>
+                            hexchat
+                        </command>
+                    </action>
+                </item>
+                <item label="Remote Filesystems">
+                    <action name="Execute">
+                        <command>
+                            gigolo
+                        </command>
+                    </action>
+                </item>
+                <menu execute="bl-remote-desktop-pipemenu" id="remotedesktop" label="Remote Desktop"/>
+                <menu execute="bl-sshconfig-pipemenu" id="sshconfig" label="SSH"/>
+                <separator label="Services"/>
+                <menu execute="bl-dropbox-pipemenu" id="dropbox" label="Dropbox"/>
+            </menu>
+            <menu id="office" label="Office">
+                <menu id="libreoffice" label="LibreOffice" execute="bl-libreoffice-pipemenu" />
+                <item label="Google Docs">
+                    <action name="Execute">
+                        <command>
+                            x-www-browser https://drive.google.com/
+                        </command>
+                    </action>
+                </item>
+                <item label="Gnumeric Spreadsheet">
+                    <action name="Execute">
+                        <command>
+                            gnumeric
+                        </command>
+                    </action>
+                </item>
+                <item label="Calculator">
+                    <action name="Execute">
+                        <command>
+                            galculator
+                        </command>
+                    </action>
+                </item>
+                <item label="Evince PDF Viewer">
+                    <action name="Execute">
+                        <command>
+                            evince
+                        </command>
+                    </action>
+                </item>
+            </menu>
+            <separator/>
+            <menu execute="bl-places-pipemenu" id="pipe-placesmenu" label="Places"/>
+            <menu execute="bl-recent-files-pipemenu -rl15" id="pipe-recentfilesmenu" label="Recent Files"/>
+            <separator/>
+            <menu id="preferences" label="Preferences">
+                <menu id="obConfig" label="Openbox">
+                    <item label="Edit menu.xml">
+                        <action name="Execute">
+                            <command>
+                                bl-text-editor ~/.config/openbox/menu.xml
+                            </command>
+                        </action>
+                    </item>
+                    <item label="Edit rc.xml">
+                        <action name="Execute">
+                            <command>
+                                bl-text-editor ~/.config/openbox/rc.xml
+                            </command>
+                        </action>
+                    </item>
+                    <item label="Edit autostart">
+                        <action name="Execute">
+                            <command>
+                                bl-text-editor ~/.config/openbox/autostart
+                            </command>
+                        </action>
+                    </item>
+                    <separator/>
+                    <item label="GUI Menu Editor">
+                        <action name="Execute">
+                            <command>
+                                obmenu
+                            </command>
+                        </action>
+                    </item>
+                    <item label="GUI Config Tool">
+                        <action name="Execute">
+                            <command>
+                                obconf
+                            </command>
+                        </action>
+                    </item>
+                    <item label="How to Edit Menu">
+                        <action name="Execute">
+                            <command>
+                                yad --button="OK":0 --center --window-icon=distributor-logo-bunsenlabs --text-info --title=&quot;How to Edit the Menu&quot; --filename=&quot;/usr/share/bunsen/docs/helpfile-menu.txt&quot; --width=900 --height=700 --fontname=Monospace
+                            </command>
+                        </action>
+                    </item>
+                    <separator/>
+                    <item label="Reconfigure">
+                        <action name="Reconfigure"/>
+                    </item>
+                    <item label="Restart">
+                        <action name="Restart"/>
+                    </item>
+                </menu>
+                <menu execute="bl-compositor" id="CompositingPipeMenu" label="Compositor"/>
+                <menu execute="bl-conky-pipemenu" id="pipe-conkymenu" label="Conky"/>
+                <menu execute="bl-tint2-pipemenu" id="pipe-tint2menu" label="Tint2"/>
+                <item label="Appearance">
+                    <action name="Execute">
+                        <command>
+                            lxappearance
+                        </command>
+                    </action>
+                </item>
+                <item label="Choose Wallpaper">
+                    <action name="Execute">
+                        <command>
+                            nitrogen
+                        </command>
+                    </action>
+                </item>
+                <item label="Notifications">
+                    <action name="Execute">
+                        <command>xfce4-notifyd-config</command>
+                    </action>
+                </item>
+                <item label="Power Management">
+                    <action name="Execute">
+                        <command>
+                            xfce4-power-manager-settings
+                        </command>
+                    </action>
+                </item>
+                <menu id="dmenuconfig" label="dmenu">
+                    <item label="Edit Start-up Script">
+                        <action name="Execute">
+                            <command>
+                                bl-text-editor ~/.config/dmenu/dmenu-bind.sh
+                            </command>
+                        </action>
+                    </item>
+                    <separator label="Help?"/>
+                    <item label="man page">
+                        <action name="Execute">
+                            <command>
+                                x-terminal-emulator -T 'man dmenu' -e man dmenu
+                            </command>
+                        </action>
+                    </item>
+                </menu>
+                <menu id="gmrunconfig" label="gmrun">
+                    <item label="Edit Config File">
+                        <action name="Execute">
+                            <command>
+                                bl-text-editor ~/.gmrunrc
+                            </command>
+                        </action>
+                    </item>
+                    <separator label="Help?"/>
+                    <item label="man page">
+                        <action name="Execute">
+                            <command>
+                                x-terminal-emulator -T 'man gmrun' -e man gmrun
+                            </command>
+                        </action>
+                    </item>
+                </menu>
+                <menu id="DisplaySettings" label="Display">
+                    <item label="ARandR Screen Layout Editor">
+                        <action name="Execute">
+                            <command>
+                                arandr
+                            </command>
+                        </action>
+                    </item>
+                    <separator label="Help?"/>
+                    <item label="man xrandr">
+                        <action name="Execute">
+                            <command>
+                                x-terminal-emulator -T 'man xrandr' -e man xrandr
+                            </command>
+                        </action>
+                    </item>
+                </menu>
+            </menu>
+            <menu id="system" label="System">
+                <menu execute="bl-printing-pipemenu" id="PrintingPipeMenu" label="Printers"/>
+                <item label="Synaptic Package Manager">
+                    <action name="Execute">
+                        <command>
+                            gksudo synaptic
+                        </command>
+                    </action>
+                </item>
+                <item label="File Manager as root">
+                    <action name="Execute">
+                        <command>
+                            gksudo bl-file-manager
+                        </command>
+                    </action>
+                </item>
+                <item label="Text Editor as root">
+                    <action name="Execute">
+                        <command>
+                            gksudo bl-text-editor
+                        </command>
+                    </action>
+                </item>
+                <item label="Login Settings">
+                    <action name="Execute">
+                        <command>
+                            gksudo bl-text-editor /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm.conf
+                        </command>
+                    </action>
+                </item>
+                <item label="GParted">
+                    <action name="Execute">
+                        <command>
+                            gksudo gparted
+                        </command>
+                    </action>
+                </item>
+                <item label="Edit Debian Alternatives">
+                    <action name="Execute">
+                        <command>
+                            gksudo galternatives
+                        </command>
+                    </action>
+                </item>
+                <separator/>
+                <item label="About Bunsen Alternatives">
+                    <action name="Execute">
+                        <execute>yad --button="OK":0 --center --window-icon=distributor-logo-bunsenlabs --text-info --title=&quot;About Bunsen Alternatives&quot; --filename=&quot;/usr/share/bunsen/docs/helpfile-bl-alternatives.txt&quot; --width=900 --height=700 --fontname=Monospace
+                        </execute>
+                    </action>
+                </item>
+            </menu>
+            <menu id="help" label="Help" execute="bl-help-pipemenu" />
+            <separator/>
+            <menu execute="bl-kb-pipemenu" id="keybinds" label="Display Keybinds"/>
+            <separator/>
+            <item label="Lock Screen">
+                <action name="Execute">
+                    <command>
+                        bl-lock
+                    </command>
+                </action>
+            </item>
+        </menu>
+<!--
+        <item label="Exit">
+            <action name="Execute">
+                <command>
+                    bl-exit
+                </command>
+            </action>
+        </item>
+-->
+<!-- comment out or remove the preceding "Exit" item,
+and uncomment the following "exit-menu"
+for one-click exit options. -->
+
+        <menu id="exit-menu"></menu>
+    </menu>
+</openbox_menu>
+
+
+
+
+
+
