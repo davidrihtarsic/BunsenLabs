@@ -405,24 +405,34 @@ NERDFONT.shell_post_install_cmds = [
 NERDFONT.notes = ''
 vsi_programi.append(NERDFONT)
 
-
-
 ## I3 ####################################################
+# tudi vse kar je potrebno za moj system
 I3 = NovProgram()
 I3.program_name = 'i3'  # ime naj bo brez presledkov
 I3.category = 'Other'
 I3.description = 'System status'  # neko besedilo za opis
 I3.shell_pre_install_cmds = [
+        # i3 window manager
         'sudo apt-get install i3 suckless-tools',
+        # i3 orodna vrstica
         'sudo apt-get install i3block',
         'git clone https://github.com/vivien/i3blocks-contrib ~/.config/i3blocks',
         'cd ~/.config/i3blocks && cp config.example config',
-        'sudo apt install rofi']
+        # menu za programe (lahko uporabljas tudi dmenu
+        'sudo apt install rofi',
+        #xbacklight ( za osvetlitev zaslona _Asus FIX)
+        #'sudo apt-get install xbacklight'
+        'sudo echo ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/kbd_backlight.rules >> /etc/udev/rules.d/backlight.rules',
+        'sudo echo ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/lcd_backlight.rules >> /etc/udev/rules.d/backlight.rules',
+        'sudo chmod a+w /sys/class/leds/asus::kbd_backlight/brightness',
+        'sudo chmod a+w /sys/class/backlight/intel_backlight/brightness',
+        # symbola fonts and emojis
+        'sudo apt-get install fonts-symbola ttf-ancient-fonts-symbola ttf-marvosym fonts-opensymbol fonts-powerline fonts-font-awesome',
+        # ffmpeg for resording screens...
+        'sudo apt-get install ffmpeg'
+        ]
 I3.notes = ''
 vsi_programi.append(I3)
-
-
-
 
 
 #################################################################

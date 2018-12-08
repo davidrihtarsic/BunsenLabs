@@ -15,11 +15,12 @@ Plugin 'junegunn/fzf'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Shougo/unite.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'jszakmeister/markdown2ctagsu'
 Plugin 'rafaqz/citation.vim'
-
-"Plugin 'ajh17/VimCompletesMe'
+Plugin 'scrooloose/nerdtree'
 Plugin 'lifepillar/vim-mucomplete' 
+Plugin 'tpope/vim-obsession'
+"Plugin 'jszakmeister/markdown2ctagsu'
+"Plugin 'ajh17/VimCompletesMe'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -161,6 +162,10 @@ let g:deoplete#enable_at_startup = 1
 "--mogoče ne bom rabil odkar uporabljam RAnger plugin
 	noremap <c-w>v :vnew<CR> 
 "	noremap <c-w>n :new<CR> 
+
+"NEERDTree - - - - - - - - - - - - - - - - - - - - - - - - - 
+map <leader>n :NERDTreeToggle<CR>
+
 "GIT--------------------------------------------------------
 "instaliraj git-fugitive
 	map <leader>gc :Gcommit -a<CR>==gi
