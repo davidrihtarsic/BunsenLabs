@@ -445,6 +445,8 @@ I3.shell_pre_install_cmds = [
         'cat ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/lcd_backlight.rules | sudo tee -a /etc/udev/rules.d/backlight.rules',
         'sudo chmod a+w /sys/class/leds/asus::kbd_backlight/brightness',
         'sudo chmod a+w /sys/class/backlight/intel_backlight/brightness',
+#touchpad guestures
+        'cat ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/touchPad_guestures.conf | sudo tee -a /usr/share/X11/xorg.conf.d/70-synaptics.conf',
         # symbola fonts and emojis
         'sudo apt-get install fonts-symbola ttf-ancient-fonts-symbola ttf-marvosym fonts-opensymbol fonts-powerline fonts-font-awesome',
         # ffmpeg for resording screens...
