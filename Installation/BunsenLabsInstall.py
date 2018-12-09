@@ -238,10 +238,12 @@ OH_MY_ZSH.category = 'Development'
 OH_MY_ZSH.description = 'Super kul bash....'\
                 '...pameten, ko svina.'  # neko besedilo za opis
 OH_MY_ZSH.shell_pre_install_cmds = [
-	'git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh'
-	'sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"',
-	'sudo -s /bin/zsh']
+        'sudo apt-get install zsh',
+	'git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh',
+	'cd ~/.oh-my-zsh && sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"',
+	'chsh -s /bin/zsh']
 OH_MY_ZSH.notes = ''
+OH_MY_ZSH.auto_install=True
 vsi_programi.append(OH_MY_ZSH)
 
 ## VIM ####################################################
@@ -283,6 +285,19 @@ Atom.auto_install = True
 Atom.notes = '!! NASTAVITI JE POTREBNO: Settings -> Packages -> ide-python [Python executables: python3] !!!'
 vsi_programi.append(Atom)
 
+## Google_Chrome ####################################################
+Google_Chrome = NovProgram()
+Google_Chrome.program_name = 'Google_Chrome'  # ime naj bo brez presledkov
+Google_Chrome.category = 'Office'
+Google_Chrome.description = 'Google Chrome'  # neko besedilo za opis
+Google_Chrome.shell_pre_install_cmds = []
+Google_Chrome.apt_get_install_cmds = []
+Google_Chrome.deb_package_path_64 ='https://dl.google.com/linux/direct/'
+Google_Chrome.deb_package_file_64 ='google-chrome-stable_current_amd64.deb'
+Google_Chrome.auto_install = True
+Google_Chrome.notes = ''
+vsi_programi.append(Google_Chrome)
+
 ## Thunderbird ####################################################
 Thunderbird = NovProgram()
 Thunderbird.program_name = 'Thunderbird'  # ime naj bo brez presledkov
@@ -306,6 +321,7 @@ RANGER.shell_pre_install_cmds = [
         'cd ~/Downloads/ranger && sudo make install',
         'sudo apt-get install w3m-img']
 RANGER.notes = ''
+RANGER.auto_install=True
 vsi_programi.append(RANGER)
 
 # LinkDotFiles ########################################################
@@ -390,6 +406,7 @@ FEH.category = 'Other'
 FEH.description = 'System status'  # neko besedilo za opis
 FEH.apt_get_install_cmds = ['feh']
 FEH.notes = ''
+FEH.auto_install=True
 vsi_programi.append(FEH)
 
 ## NERDFONT ####################################################
@@ -403,6 +420,7 @@ NERDFONT.shell_post_install_cmds = [
         'git clone https://github.com/ryanoasis/nerd-fonts.git ~/Downloads/nerd-font',
         'cd ~/Downloads/nerd-font && ./install.sh UbuntuNerdFont']
 NERDFONT.notes = ''
+NERDFONT.auto_install=True
 vsi_programi.append(NERDFONT)
 
 ## I3 ####################################################
@@ -415,15 +433,16 @@ I3.shell_pre_install_cmds = [
         # i3 window manager
         'sudo apt-get install i3 suckless-tools',
         # i3 orodna vrstica
-        'sudo apt-get install i3block',
+        'sudo apt-get install i3blocks',
         'git clone https://github.com/vivien/i3blocks-contrib ~/.config/i3blocks',
         'cd ~/.config/i3blocks && cp config.example config',
         # menu za programe (lahko uporabljas tudi dmenu
         'sudo apt install rofi',
         #xbacklight ( za osvetlitev zaslona _Asus FIX)
         #'sudo apt-get install xbacklight'
-        'sudo echo ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/kbd_backlight.rules >> /etc/udev/rules.d/backlight.rules',
-        'sudo echo ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/lcd_backlight.rules >> /etc/udev/rules.d/backlight.rules',
+        'sudo touch /etc/udev/rules.d/backlight.rules',
+        'cat ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/kbd_backlight.rules | sudo tee /etc/udev/rules.d/backlight.rules',
+        'cat ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/.config/i3/lcd_backlight.rules | sudo tee -a /etc/udev/rules.d/backlight.rules',
         'sudo chmod a+w /sys/class/leds/asus::kbd_backlight/brightness',
         'sudo chmod a+w /sys/class/backlight/intel_backlight/brightness',
         # symbola fonts and emojis
@@ -432,6 +451,7 @@ I3.shell_pre_install_cmds = [
         'sudo apt-get install ffmpeg'
         ]
 I3.notes = ''
+I3.auto_install=True
 vsi_programi.append(I3)
 
 
