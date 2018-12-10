@@ -42,6 +42,16 @@ class NovProgram(object):
         self.deb_package_file_32 = ''
         self.deb_package_path_64 = ''
         self.deb_package_file_64 = ''
+# tar installation variables - - - - - - - - 
+        self.tar_package_path = ''
+        self.tar_package_file = ''
+        self.tar_package_path_32 = ''
+        self.tar_package_file_32 = ''
+        self.tar_package_path_64 = ''
+        self.tar_package_file_64 = ''
+        self.tar_destination = '' # default je /opt/IME_PROGRAMA
+        self.tar_extra_cmds = []
+# shell post install - - - - - - - - - - - - 
         self.shell_post_install_cmds = []
         self.check_version_cmd = ''
         self.auto_install = False
@@ -66,7 +76,7 @@ class NovProgram(object):
                         pass
                     else:
                         # it is not installed... install it!
-                        os.system('sudo apt-get install '+apt_cmd)
+                        os.system('sudo apt-get install --yes '+apt_cmd)
                 else:
                     key = input(thisAppOutput+'Install with APTITUDE: ' + apt_cmd + confirmText)
                     if key == 'y':
@@ -82,7 +92,28 @@ class NovProgram(object):
                     key = input(thisAppOutput+'Execute: '+shell_cmd + confirmText)
                 if key == 'y':
                     os.system(shell_cmd)
-    
+   
+    def make_destop_file(self):
+        ## Dodajanje program.desktop datoteke v /usr/share/applications/ ################
+        if len(self.program_desktop) != 0:
+            # test ce je kaj not: sys.stdout.write(self.program_desktop[0])
+            # sudo sh -c 'echo "export PATH=\$PATH:/opt/arduino-1.8.1" >> /etc/profile.d/arduino_path.sh'
+            if self.auto_install:
+                key = 'y'
+            else:
+                key = input(thisAppOutput+'Naredi menu:'+ menu_desktop + self.program_name+ '.desktop ?'+confirmText)
+            if key == 'y':
+                #naredi le ce fajl ne obstaja...
+                if not os.path.isfile(menu_desktop + self.program_name+ '.desktop'):
+                    for menu in self.program_desktop:
+                        sudo_txt=[]
+                        sudo_txt.append('sudo sh -c ')
+                        sudo_txt.append("'echo ")
+                        sudo_txt.append('"'+ menu + '"')
+                        sudo_txt.append(" >> "+ menu_desktop + self.program_name + ".desktop'")
+                        #sys.stdout.write(sudo_txt[0]+sudo_txt[1]+sudo_txt[2]+sudo_txt[3])
+                        os.system(sudo_txt[0]+sudo_txt[1]+sudo_txt[2]+sudo_txt[3])
+
     def shell_post_install_cmd(self):
         # Post INSTALL operations #####################################################
         if len(self.shell_post_install_cmds) != 0:
@@ -96,7 +127,6 @@ class NovProgram(object):
 
     def install_DEB_package(self):
         ## Install form DEB package ###################################################
-	#if self.deb_package_file != '':
         if (self.deb_package_file !='' or
         (self.deb_package_file_64 != '' and self.arhitecture_64bit ) or
         (self.deb_package_file_32 != '' and self.arhitecture_32bit )):
@@ -121,26 +151,111 @@ class NovProgram(object):
                 #ce file ne obstaja gremo gledat na internet...
                 sys.stdout.write(thisAppOutput+'Preverjam DEB package...'+escapeColorDefault+'\n')
                 os.system('wget --spider -v '+temp_deb_package_path+temp_deb_package_file)
-                key = input(thisAppOutput+'Prenesi v '+download_dir+ confirmText)
+                if self.auto_install:
+                    key = 'y'
+                else:
+                    key = input(thisAppOutput+'Prenesi v '+download_dir+ confirmText)
                 if key == 'y':
                     os.system('wget '+ temp_deb_package_path + temp_deb_package_file + ' --directory-prefix='+download_dir )
             #pokazi direktorij Download
             if os.path.isfile(download_dir+temp_deb_package_file):
                 sys.stdout.write(thisAppOutput+'Nasel:'+escapeColorDefault+'\n')
                 os.system('ls -all ' + download_dir + ' | grep ' + temp_deb_package_file)
-                key = input(thisAppOutput+'Namesti DEB package: ' + temp_deb_package_file + confirmText)
+                if self.auto_install:
+                    key = 'y'
+                else:
+                    key = input(thisAppOutput+'Namesti DEB package: ' + temp_deb_package_file + confirmText)
                 if key == 'y':
                     os.system('sudo dpkg -i ' + download_dir + temp_deb_package_file)
                     sys.stdout.write(thisAppOutput+'Namestitev koncana...'+escapeColorDefault+'\n')
-                key = input(thisAppOutput+'Izbrisi datoteko:'
-                    + download_dir + temp_deb_package_file+'*'
-                    + confirmText)
+                if self.auto_install:
+                    key = 'y'
+                else:
+                    key = input(thisAppOutput+'Izbrisi datoteko:'
+                            + download_dir + temp_deb_package_file+'*'
+                            + confirmText)
                 if key == 'y':
                     os.system('rm -v ' + download_dir + temp_deb_package_file)
                     #sys.stdout.write(thisAppOutput+'Izprisano:'+escapeColorDefault+'\n')
                     #os.system('ls -all ' + download_dir)
             else:
                 sys.stdout.write(thisAppOutput+'Paketa: '+ temp_deb_package_file +' nismo nasli...'+escapeColorDefault+'\n')
+
+
+    def install_TAR_package(self):
+        ## Install form TAR **** special !!! ###########################################
+        if (self.tar_package_file !='' or
+        (self.tar_package_file_64 != '' and self.arhitecture_64bit ) or
+        (self.tar_package_file_32 != '' and self.arhitecture_32bit )):
+            #Najprej poglejmo kaksno arhitekturo imamo
+            if (self.tar_package_file_64 != '' and self.arhitecture_64bit ):
+                sys.stdout.write(thisAppOutput+'Kaze, da imate 64bit arhitekturo...'+escapeColorDefault+'\n')
+                temp_tar_package_path = self.tar_package_path_64
+                temp_tar_package_file = self.tar_package_file_64
+            elif (self.tar_package_file_32 != '' and self.arhitecture_32bit):
+                sys.stdout.write(thisAppOutput+'Kaze, da imate 32bit arhitekturo...'+escapeColorDefault+'\n')
+                temp_tar_package_path = self.tar_package_path_32
+                temp_tar_package_file = self.tar_package_file_32
+            else:
+                sys.stdout.write(thisAppOutput+'Ne glede na arhitekturo...'+escapeColorDefault+'\n')
+                temp_tar_package_path = self.tar_package_path
+                temp_tar_package_file = self.tar_package_file
+            #Najprej zloadas tar file ... izi bizi...
+            if not os.path.isfile(download_dir+temp_tar_package_file):
+                #ce file ne obstaja gremo gledat na internet...
+                sys.stdout.write(thisAppOutput+'Preverjam TAR package...'+escapeColorDefault+'\n')
+                os.system('wget --spider -v '+temp_tar_package_path+temp_tar_package_file)
+                if self.auto_install:
+                    key = 'y'
+                else:
+                    key = input(thisAppOutput+'Prenesi v '+download_dir+ '?'+confirmText)
+                if key == 'y':
+                    os.system('wget '+ temp_tar_package_path + temp_tar_package_file + ' --directory-prefix='+download_dir )
+            #pokazi direktorij Download
+            if os.path.isfile(download_dir+temp_tar_package_file):
+                sys.stdout.write(thisAppOutput+'Nasel:'+escapeColorDefault+'\n')
+                os.system('ls -all ' + download_dir + ' | grep ' + temp_tar_package_file)
+                if self.tar_destination == '':
+                    if self.auto_install:
+                        key = 'y'
+                    else:
+                        key = input(thisAppOutput+'Razpakiraj TAR package: '+ temp_tar_package_file +' v ' + download_dir + '?'+confirmText)
+                    if key == 'y':
+                        os.system('tar -xvf '+ download_dir+temp_tar_package_file+' --directory '+ download_dir)
+                else:
+                    if self.auto_install:
+                        key = 'y'
+                    else:
+                        key = input(thisAppOutput+'Razpakiraj TAR package: '+ temp_tar_package_file +' v ' + self.tar_destination + '?'+confirmText)
+                    if key == 'y':
+                        if not os.path.isdir(self.tar_destination):
+                            #ce dir se ne obstaja ga ustvari...
+                            os.system('sudo mkdir ' + self.tar_destination)
+                        os.system('sudo tar -xvf '+download_dir+temp_tar_package_file+' --directory '+ self.tar_destination)
+                # Izbrisi kar smo zloadali... da pocistimo za seboj...
+                if self.auto_install:
+                    key = 'y'
+                else:
+                    key = input(thisAppOutput+'Izbrisi datoteko:'+ download_dir + temp_tar_package_file+'*'+ confirmText)
+                if key == 'y':
+                    os.system('rm -v ' + download_dir + temp_tar_package_file+'*')
+                    #sys.stdout.write(thisAppOutput+'Izbrisano:'+escapeColorDefault+'\n')
+                    #os.system('ls -all ' + download_dir)
+            else:
+            	sys.stdout.write(thisAppOutput+'Datoteke: '+download_dir+temp_tar_package_file+' nismo nasli...'+escapeColorDefault+'\n')
+            
+            ## INSTALATION SOURCE CODE #######################################################
+            	# ok sedaj naj bi bilo razpakirano... kjerkoli pac ze...
+            	#ja nic zej pa ce je treba se kako EXTRA CMD narest!!!
+            	#naprimer kak make, make install, itd
+            	#skratka izvrsimo komande, ki jih najdemo v :
+            	#self.tar_extra_cmds = ['make','make install']
+            if len(self.tar_extra_cmds) != 0:
+                for extra_cmd in self.tar_extra_cmds:
+                    key = input(thisAppOutput+'execute:'+extra_cmd+confirmText)
+                    if key == 'y':
+                        os.system(extra_cmd)
+
 
     def version_check(self):
         # KONEC INSTALACIJE samo se navodila in verzija check! ########################
@@ -198,13 +313,12 @@ class NovProgram(object):
             sys.stdout.write(escapeColorDefault+self.description[new_start:]+''+escapeColorDefault+'\n'
                              + '###########################################################\n')
         # 
-        #self.arch_pacman_install()
-        #self.arch_yaourt_install()
         self.shell_pre_install_cmd()
         self.apt_get_install()
         self.install_DEB_package()
+        self.install_TAR_package()
         self.shell_post_install_cmd()
-        #self.arch_run_zsh_cmds()
+        self.make_destop_file()
         self.show_notes()
         sys.stdout.write(thisAppOutput+'Pritisni [ENTER] za nadaljevanje...'+escapeColorDefault+'\n')
 
@@ -251,7 +365,7 @@ VIM = NovProgram()
 VIM.program_name = 'vim'  # ime naj bo brez presledkov
 VIM.category = 'Development'
 VIM.description = 'VIM like file manager.'  # neko besedilo za opis
-VIM.apt_get_install_cmds = ['vim-nox']
+VIM.apt_get_install_cmds = ['vim-gtk']
 VIM.shell_post_install_cmds = [
 	'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
 	'sudo apt-get install exuberant-ctags',
@@ -259,6 +373,60 @@ VIM.shell_post_install_cmds = [
 VIM.notes = ''
 VIM.auto_install = True
 vsi_programi.append(VIM)
+
+## Gimp ####################################################
+Gimp = NovProgram()
+Gimp.program_name = 'Gimp'  # ime naj bo brez presledkov
+Gimp.category = 'Development'
+Gimp.description = 'Gimp - orodje za obdelavo birtnih slik.'  # neko besedilo za opis
+Gimp.apt_get_install_cmds = ['gimp']
+Gimp.notes = ''
+Gimp.auto_install = True
+vsi_programi.append(Gimp)
+
+## PopcornTime ####################################################
+PopcornTime = NovProgram()
+PopcornTime.program_name = 'PopcornTime'  # ime naj bo brez presledkov
+PopcornTime.category = 'Multimedia'
+PopcornTime.description = 'PopcornTime.'  # neko besedilo za opis
+PopcornTime.notes = ''
+PopcornTime.tar_package_path_64='https://dl.popcorn-time.to/'
+PopcornTime.tar_package_file_64='Popcorn-Time-linux64.tar.gz'
+PopcornTime.tar_destination=opt_dir+PopcornTime.program_name
+PopcornTime.program_desktop=[
+        '[Desktop Entry]',
+        'Version=1.0',
+        'Name=PopcornTime (Movies, Cartoons, Series...',
+        'Exec=/opt/PopcornTime/Popcorn-Time',
+        'Icon=',
+        'Terminal=false',
+        'Type=Application',
+        'Categories=Enterteinment;'
+        ]
+PopcornTime.auto_install = True
+vsi_programi.append(PopcornTime)
+
+## Arduino ####################################################
+Arduino = NovProgram()
+Arduino.program_name = 'Arduino'  # ime naj bo brez presledkov
+Arduino.category = 'Development'
+Arduino.description = 'Programming IDE for Arduino boards...'  # neko besedilo za opis
+Arduino.notes = ''
+Arduino.tar_package_path_64='https://downloads.arduino.cc/'
+Arduino.tar_package_file_64='arduino-nightly-linux64.tar.xz'
+Arduino.tar_destination=opt_dir
+Arduino.auto_install = True
+Arduino.program_desktop = [
+        '[Desktop Entry]',
+        'Version=1.0',
+        'Name=Arduino IDE',
+        'Exec=/opt/arduino-nightly/arduino',
+        'Icon=openbox.png',
+        'Terminal=false',
+        'Type=Application',
+        'Categories=Development;'
+        ]
+vsi_programi.append(Arduino)
 
 ## Atom ####################################################
 Atom = NovProgram()
@@ -310,6 +478,45 @@ Thunderbird.shell_post_install_cmds = []
 Thunderbird.auto_install = True
 Thunderbird.notes = ''
 vsi_programi.append(Thunderbird)
+
+## Nemo ####################################################
+Nemo = NovProgram()
+Nemo.program_name = 'Nemo'  # ime naj bo brez presledkov
+Nemo.category = 'Office'
+Nemo.description = 'Nemo - File manager'  # neko besedilo za opis
+Nemo.shell_pre_install_cmds = []
+Nemo.apt_get_install_cmds = [
+        'nemo']
+Nemo.shell_post_install_cmds = []
+Nemo.auto_install = True
+Nemo.notes = ''
+vsi_programi.append(Nemo)
+
+## Zathura ####################################################
+Zathura = NovProgram()
+Zathura.program_name = 'Zathura'  # ime naj bo brez presledkov
+Zathura.category = 'Office'
+Zathura.description = 'Zathura PEF reader'  # neko besedilo za opis
+Zathura.shell_pre_install_cmds = []
+Zathura.apt_get_install_cmds = [
+        'zathura']
+Zathura.shell_post_install_cmds = []
+Zathura.auto_install = True
+Zathura.notes = ''
+vsi_programi.append(Zathura)
+
+## PrinterSupport ####################################################
+PrinterSupport = NovProgram()
+PrinterSupport.program_name = 'PrinterSupport'  # ime naj bo brez presledkov
+PrinterSupport.category = 'Office'
+PrinterSupport.description = 'PrinterSupport PEF reader'  # neko besedilo za opis
+PrinterSupport.shell_pre_install_cmds = []
+PrinterSupport.apt_get_install_cmds = [
+        'task-print-server']
+PrinterSupport.shell_post_install_cmds = []
+PrinterSupport.auto_install = True
+PrinterSupport.notes = ''
+vsi_programi.append(PrinterSupport)
 
 ## RANGER ####################################################
 RANGER = NovProgram()

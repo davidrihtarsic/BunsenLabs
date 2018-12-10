@@ -19,6 +19,7 @@ Plugin 'rafaqz/citation.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lifepillar/vim-mucomplete' 
 Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-fugitive'
 "Plugin 'jszakmeister/markdown2ctagsu'
 "Plugin 'ajh17/VimCompletesMe'
 
@@ -65,13 +66,13 @@ filetype plugin indent on    " required
 "PLUGINS SETTINGS                                          #
 "###########################################################
 "RANGER SETTINGS
-map <leader>rr :RangerEdit<cr>
-map <leader>rv :RangerVSplit<cr>
-map <leader>rs :RangerSplit<cr>
-map <leader>rt :RangerTab<cr>
-map <leader>ri :RangerInsert<cr>
-map <leader>ra :RangerAppend<cr>
-map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
+"map <leader>rr :RangerEdit<cr>
+"map <leader>rv :RangerVSplit<cr>
+"map <leader>rs :RangerSplit<cr>
+"map <leader>rt :RangerTab<cr>
+"map <leader>ri :RangerInsert<cr>
+"map <leader>ra :RangerAppend<cr>
+"map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
 
 "VimCompletesMe - - - - - - - - - -
 "settings:
@@ -164,7 +165,7 @@ let g:deoplete#enable_at_startup = 1
 "	noremap <c-w>n :new<CR> 
 
 "NEERDTree - - - - - - - - - - - - - - - - - - - - - - - - - 
-map <leader>n :NERDTreeToggle<CR>
+map <leader>r :NERDTreeToggle<CR>
 
 "GIT--------------------------------------------------------
 "instaliraj git-fugitive
@@ -203,7 +204,7 @@ map <leader>n :NERDTreeToggle<CR>
 "nnoremap <C-c> :copy .<CR>
 "	map <C-> "+P
 	vnoremap <C-y> "+y
-	vnoremap y "+y
+"	vnoremap y "+y
 "new tab
 	"nnoremap <C-t> :tabedit<CR>==gi
 	nnoremap <C-t> :tabedit<CR>

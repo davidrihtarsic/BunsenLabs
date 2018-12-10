@@ -34,10 +34,10 @@ focus_follows_mouse no
 ##################################
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+w exec google-chrome-stable
-bindsym $mod+e exec terminator --execute vim -S ~/.vim/session
+bindsym $mod+e [title="VIM"] exec terminator --command='vim -S ~/.vim/session --servername VIM_MAIN'
 bindsym $mod+a exec atom 
 bindsym $mod+t exec thunderbird 
-bindsym $mod+r exec FileManager 
+bindsym $mod+r exec nemo --no-desktop 
 
 bindsym $Mod+Control+Shift+h exec systemctl hibernate
 

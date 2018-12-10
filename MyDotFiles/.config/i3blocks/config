@@ -32,7 +32,7 @@ markup=none
 # Date Time
 #
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%H:%M  %Y-%m-%d'
 interval=5
 
 # Memory usage
@@ -56,11 +56,11 @@ interval=30
 # The directory defaults to $HOME if the instance is not specified.
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
-[disk]
-command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-label=HOME
+#[disk]
+#command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+#label=HOME
 #DIR=/mnt/data
-interval=30
+#interval=30
 
 # Network interface monitoring
 #
@@ -118,7 +118,6 @@ interval=30
 #instance=spotify
 #interval=5
 #signal=10
-
 # OpenVPN support
 #
 # Support multiple VPN, with colors.
@@ -130,9 +129,10 @@ interval=30
 # Support multiple chips, though lm-sensors.
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10
+[temperature]
+command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+label=TEMP
+interval=10
 
 # Key indicators
 #
