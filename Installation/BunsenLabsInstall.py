@@ -31,18 +31,21 @@ class NovProgram(object):
         self.program_name = ''
         self.index = 0
         self.category = ''
+        self.program_desktop = ''
         self.description = ''
         self.notes = ''
-        # instalation variables---------------
+# shell PRE install - - - - - - - - - - - - -
         self.shell_pre_install_cmds = []
+# APT installation - - - - - - - - - - - - - -
         self.apt_get_install_cmds = []
+# DEB instalation
         self.deb_package_path = ''
         self.deb_package_file = ''
         self.deb_package_path_32 = ''
         self.deb_package_file_32 = ''
         self.deb_package_path_64 = ''
         self.deb_package_file_64 = ''
-# tar installation variables - - - - - - - - 
+# TAR installation variables - - - - - - - - 
         self.tar_package_path = ''
         self.tar_package_file = ''
         self.tar_package_path_32 = ''
@@ -51,11 +54,11 @@ class NovProgram(object):
         self.tar_package_file_64 = ''
         self.tar_destination = '' # default je /opt/IME_PROGRAMA
         self.tar_extra_cmds = []
-# shell post install - - - - - - - - - - - - 
+# shell POST install - - - - - - - - - - - - 
         self.shell_post_install_cmds = []
         self.check_version_cmd = ''
         self.auto_install = False
-
+# - - - - - - - - - - - - - - - - - - - - - -
         self.arhitecture_64bit = False
         self.arhitecture_32bit = False
         self.arhitecture_bit_num = 0
@@ -453,10 +456,27 @@ Atom.auto_install = True
 Atom.notes = '!! NASTAVITI JE POTREBNO: Settings -> Packages -> ide-python [Python executables: python3] !!!'
 vsi_programi.append(Atom)
 
+## LibreOffice ####################################################
+LibreOffice = NovProgram()
+LibreOffice.program_name = 'LibreOffice'  # ime naj bo brez presledkov
+LibreOffice.category = 'Office'
+LibreOffice.description = 'Office orodja... kot so word spreadsheet... base...'  # neko besedilo za opis
+LibreOffice.shell_pre_install_cmds = []
+LibreOffice.apt_get_install_cmds = []
+LibreOffice.tar_package_path_64 ='https://mirror.ibcp.fr/pub/tdf/libreoffice/stable/6.1.3/deb/x86_64/'
+LibreOffice.tar_package_file_64 ='LibreOffice_6.1.3_Linux_x86-64_deb.tar.gz'
+LibreOffice.tar_destination =''
+LibreOffice.shell_post_install_cmds = [
+	'sudo dpkg -i '+ download_dir +'LibreOffice_*_Linux_*_deb/DEBS/*.deb'
+        ]
+LibreOffice.auto_install = False
+LibreOffice.notes = '!! NASTAVITI JE POTREBNO: Settings -> Packages -> ide-python [Python executables: python3] !!!'
+vsi_programi.append(LibreOffice)
+
 ## Google_Chrome ####################################################
 Google_Chrome = NovProgram()
 Google_Chrome.program_name = 'Google_Chrome'  # ime naj bo brez presledkov
-Google_Chrome.category = 'Office'
+Google_Chrome.category = 'Internet'
 Google_Chrome.description = 'Google Chrome'  # neko besedilo za opis
 Google_Chrome.shell_pre_install_cmds = []
 Google_Chrome.apt_get_install_cmds = []
@@ -465,6 +485,19 @@ Google_Chrome.deb_package_file_64 ='google-chrome-stable_current_amd64.deb'
 Google_Chrome.auto_install = True
 Google_Chrome.notes = ''
 vsi_programi.append(Google_Chrome)
+
+## Deluge ####################################################
+Deluge = NovProgram()
+Deluge.program_name = 'Deluge'  # ime naj bo brez presledkov
+Deluge.category = 'Internet'
+Deluge.description = 'Torent service.'  # neko besedilo za opis
+Deluge.shell_pre_install_cmds = []
+Deluge.apt_get_install_cmds = [
+        'deluge'
+        ]
+Deluge.auto_install = True
+Deluge.notes = ''
+vsi_programi.append(Deluge)
 
 ## Thunderbird ####################################################
 Thunderbird = NovProgram()
