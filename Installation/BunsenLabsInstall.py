@@ -499,6 +499,26 @@ Deluge.auto_install = True
 Deluge.notes = ''
 vsi_programi.append(Deluge)
 
+## PanDoc ####################################################
+PanDoc = NovProgram()
+PanDoc.program_name = 'PanDoc'  # ime naj bo brez presledkov
+PanDoc.category = 'Office'
+PanDoc.description = 'Pandoc je za pretvarjanje md v odf.'  # neko besedilo za opis
+PanDoc.shell_pre_install_cmds = []
+PanDoc.apt_get_install_cmds = [
+        'texlive-xetex',
+        'texlive-luatex',
+        'texlive-fonts-extra'
+        ]
+PanDoc.deb_package_path_64 = 'https://github.com/jgm/pandoc/releases/download/2.5/'
+PanDoc.deb_package_file_64 = 'pandoc-2.5-1-amd64.deb'
+PanDoc.shell_post_install_cmds = [
+        'pip3 install --upgrade git+https://github.com/msprev/panzer'
+        ]
+PanDoc.auto_install = True
+PanDoc.notes = ''
+vsi_programi.append(PanDoc)
+
 ## Thunderbird ####################################################
 Thunderbird = NovProgram()
 Thunderbird.program_name = 'Thunderbird'  # ime naj bo brez presledkov

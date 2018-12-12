@@ -219,7 +219,7 @@ map <leader>r :NERDTreeToggle<CR>
 	noremap <leader>d :!pandoc --pdf-engine=xelatex % -o %:p:r.pdf 
 	noremap <leader>p :w<CR>:!(clear && cd %:p:h && panzer %:p:t --to latex -o %:p:r.pdf --from markdown --filter pandoc-citeproc --filter pandoc-mermaid --listings --pdf-engine=xelatex)<CR><CR>
 	"noremap <C-p> :!zathura %:p:r.pdf <c-r> && disown <CR><CR>
-  noremap <C-p> :!(zathura %:p:r.pdf & )<CR><CR>
+  noremap <C-p> :!(zathura %:p:r.pdf & )<CR>
 "UNITE------------------------------------------------------
   nmap <space> [unite]
 	nnoremap [unite] <nop>

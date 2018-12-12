@@ -31,9 +31,18 @@ markup=none
 
 # Date Time
 #
-[time]
-command=date '+%H:%M  %Y-%m-%d'
+#[time]
+#command=date '+%H:%M  %Y-%m-%d'
+#interval=5
+
+[calendar]
+command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
 interval=5
+label= 
+#DATEFMT=+%H:%M:%S
+#SHORTFMT=+%H:%M:%S
+#HEIGHT=180
+#WIDTH=220
 
 # Memory usage
 #
