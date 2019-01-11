@@ -363,6 +363,19 @@ OH_MY_ZSH.notes = ''
 OH_MY_ZSH.auto_install=True
 vsi_programi.append(OH_MY_ZSH)
 
+## FZF ####################################################
+FZF = NovProgram()
+FZF.program_name = 'FZF'  # ime naj bo brez presledkov
+FZF.category = 'System'
+FZF.description = 'FZF je ful kul iskalnik.'  # neko besedilo za opis
+FZF.shell_pre_install_cmds = [
+        'git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf',
+        '~/.fzf/install'
+        ]
+FZF.notes = ''
+FZF.auto_install = True
+vsi_programi.append(FZF)
+
 ## VIM ####################################################
 VIM = NovProgram()
 VIM.program_name = 'vim'  # ime naj bo brez presledkov
@@ -370,9 +383,12 @@ VIM.category = 'Development'
 VIM.description = 'VIM like file manager.'  # neko besedilo za opis
 VIM.apt_get_install_cmds = ['vim-gtk']
 VIM.shell_post_install_cmds = [
-	'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
-	'sudo apt-get install exuberant-ctags',
-    'sudo apt-get font-symbola']
+        'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
+        'sudo apt-get install exuberant-ctags',
+        'sudo apt-get font-symbola',
+        'pip3 install pybtex',
+        'mkdir ~/.vim/cache'
+        ]
 VIM.notes = ''
 VIM.auto_install = True
 vsi_programi.append(VIM)
@@ -418,7 +434,7 @@ Arduino.notes = ''
 Arduino.tar_package_path_64='https://downloads.arduino.cc/'
 Arduino.tar_package_file_64='arduino-nightly-linux64.tar.xz'
 Arduino.tar_destination=opt_dir
-Arduino.auto_install = True
+#Arduino.auto_install = True
 Arduino.program_desktop = [
         '[Desktop Entry]',
         'Version=1.0',
@@ -429,6 +445,7 @@ Arduino.program_desktop = [
         'Type=Application',
         'Categories=Development;'
         ]
+Arduino.shell_post_install_cmds = ['sudo usermod -a -G dialout ' + user]
 vsi_programi.append(Arduino)
 
 ## Atom ####################################################
@@ -498,6 +515,32 @@ Deluge.apt_get_install_cmds = [
 Deluge.auto_install = True
 Deluge.notes = ''
 vsi_programi.append(Deluge)
+
+## PdfTk ####################################################
+PdfTk = NovProgram()
+PdfTk.program_name = 'PdfTk'  # ime naj bo brez presledkov
+PdfTk.category = 'Office'
+PdfTk.description = 'PdfTk je swiss-army knife for pdf documents.'  # neko besedilo za opis
+PdfTk.shell_pre_install_cmds = []
+PdfTk.apt_get_install_cmds = [
+        'pdftk'
+        ]
+PdfTk.auto_install = True
+PdfTk.notes = ''
+vsi_programi.append(PdfTk)
+
+## CMUS ####################################################
+CMUS = NovProgram()
+CMUS.program_name = 'CMUS'  # ime naj bo brez presledkov
+CMUS.category = 'Accesories'
+CMUS.description = 'CMUS je terminal program za predvajanje glasbe.'  # neko besedilo za opis
+CMUS.shell_pre_install_cmds = []
+CMUS.apt_get_install_cmds = [
+        'cmus'
+        ]
+CMUS.auto_install = True
+CMUS.notes = ''
+vsi_programi.append(CMUS)
 
 ## PanDoc ####################################################
 PanDoc = NovProgram()

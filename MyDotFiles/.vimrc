@@ -117,7 +117,7 @@ set completeopt+=noinsert
 " Add support for markdown files in tagbar.
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : '/home/david/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/markdown2ctags.py',
+    \ 'ctagsbin' : '/home/david/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/markdown2ctags.py',
     \ 'ctagsargs' : '-f - --sort=no --sro=»',
     \ 'kinds' : [
         \ 's:sections',
@@ -137,7 +137,8 @@ let g:deoplete#enable_at_startup = 1
 	map <F6> :set spell spelllang=
 	map <S-F6> :set nospell<CR>
 "-- next spell error
-	nmap gs ]s
+	nmap sn ]s
+	nmap sp [s
 "-- spell sugestions
 	nmap ss z=
 "vims' file search ----------------------------------------
@@ -217,9 +218,9 @@ map <leader>r :NERDTreeToggle<CR>
 "pandoc-----------------------------------------------------
 	noremap <leader>s :!panzer -t revealjs -s -o %:p:r.html %:p -V revealjs-url=http://lab.hakim.se/reveal-js 
 	noremap <leader>d :!pandoc --pdf-engine=xelatex % -o %:p:r.pdf 
-	noremap <leader>p :w<CR>:!(clear && cd %:p:h && panzer %:p:t --to latex -o %:p:r.pdf --from markdown --filter pandoc-citeproc --filter pandoc-mermaid --listings --pdf-engine=xelatex)<CR><CR>
+	noremap <leader>p :w<CR>:!(clear && cd %:p:h && panzer %:p:t --to latex -o %:p:r.pdf --from markdown+hard_line_breaks --filter pandoc-citeproc --filter pandoc-mermaid --listings --pdf-engine=xelatex)<CR><CR>
 	"noremap <C-p> :!zathura %:p:r.pdf <c-r> && disown <CR><CR>
-  noremap <C-p> :!(zathura %:p:r.pdf & )<CR>
+  noremap <C-p> :!(zathura %:p:r.pdf & )<CR><CR>
 "UNITE------------------------------------------------------
   nmap <space> [unite]
 	nnoremap [unite] <nop>
@@ -239,37 +240,38 @@ map <leader>r :NERDTreeToggle<CR>
 	" to-do
 	" inster TIMESHEET
 	" premakni tako , da bodo insrti besedila delovali le v  INSERT MODEu!
-	map ,n gg:-1r ! ~/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/markdown_header.sh<CR>gg
-	map ,t :r !	~/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/timesheetNotes.sh<CR>
-	map ,h 0/<hh:mm><CR>"_c7l<CR><Esc>:-1r ! ~/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/insert_time.sh<CR>kJJ
+	map ,n gg:-1r ! ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/markdown_header.sh<CR>gg
+	map ,t :r !	~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/timesheetNotes.sh<CR>
+	map ,h 0/<hh:mm><CR>"_c7l<CR><Esc>:-1r ! ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/insert_time.sh<CR>kJJ
 
 	"---
 	inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
 	vnoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
 	map <Space><Tab> <Esc>/<++><Enter>"_c4l
 	"---
-	autocmd Filetype markdown,rmd inoremap ,n <Esc>gg:-1r ! ~/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/markdown_header.sh<CR>gg
-	autocmd Filetype markdown,rmd inoremap ,t <++><Esc>:-1r ! ~/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/timesheetNotes.sh<CR>
-	autocmd Filetype markdown,rmd inoremap ,h <CR><Esc>:-1r ! ~/Files/GitHub_noSync/ArchLabs/MyDotFiles/bin/markdown/insert_time.sh<CR>kJJ
+	autocmd Filetype markdown,rmd inoremap ,n <Esc>gg:-1r ! ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/markdown_header.sh<CR>gg
+	autocmd Filetype markdown,rmd inoremap ,t <++><Esc>:-1r ! ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/timesheetNotes.sh<CR>
+	autocmd Filetype markdown,rmd inoremap ,h <CR><Esc>:-1r ! ~/Files/GitHub_noSync/BunsenLabs/MyDotFiles/bin/markdown/insert_time.sh<CR>kJJi
 	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
 	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
 	autocmd Filetype markdown,rmd inoremap ,i **<++><Esc>F*i
 	autocmd Filetype markdown,rmd inoremap ,l [](<++>)<++><Esc>F[a
   autocmd Filetype markdown,rmd inoremap ,p ```python<CR>```<CR><CR><esc>2kO
   autocmd Filetype markdown,rmd inoremap ,c ```cpp<cr>```<cr><cr><esc>2kO
-	autocmd Filetype markdown,rmd inoremap ,j ![<++>\label{<++>}](./)<++><Esc>F/:Unite -input=".jpg\|.jpeg\|.gif\|.png\|.bmp\|.tiff" -default-action=append file_rec <CR> F[a 
-	autocmd Filetype markdown,rmd inoremap ,x <++><Esc>F<<Left><Left> <Esc>:!rm -f ~/.vim/cache/citation_vim_cache<CR> :Unite -buffer-name=citation-start-insert -default-action=append citation/key<CR><CR>
+	autocmd Filetype markdown,rmd inoremap ,j	![<++>\label{<++>}](./)<++><Esc>F/:Unite -input="*.jpg\|*.jpeg\|*.gif\|*.png\|*.bmp\|*.tiff" -default-action=append file_rec <CR> F[a 
+	"autocmd Filetype markdown,rmd inoremap ,x <++><Esc>F<<Left><Left> <Esc>:!rm -f ~/.vim/cache/citation_vim_cache<CR> :Unite -buffer-name=citation-start-insert -default-action=append citation/key<CR><CR>
+	autocmd Filetype markdown,rmd inoremap ,x <Esc>:!rm -f ~/.vim/cache/citation_vim_cache<CR> :Unite -buffer-name=citation-start-insert -default-action=append citation/key<CR><CR>
 	"autocmd BufNew,BufRead markdown,*.md :setlocal textwidth=80
 	"autocmd BufNew,BufRead markdown,*.md normal gggqG 
 	autocmd BufRead markdown,*.md normal zR
 
 	"auto wrapping selected text
-	vnoremap ( xi()<ESC>P2li
-	vnoremap " xi""<ESC>P2li
-	vnoremap ' xi''<ESC>P2li
-	vnoremap [ xi[]<ESC>P2li
-	vnoremap { xi{}<ESC>P2li
-	vnoremap < xi<><ESC>P2li
+	vnoremap ( xi ()<ESC>P2li
+	vnoremap " xi ""<ESC>P2li
+	vnoremap ' xi ''<ESC>P2li
+	vnoremap [ xi []<ESC>P2li
+	vnoremap { xi {}<ESC>P2li
+	vnoremap < xi <><ESC>P2li
 
 	set nocompatible
 	if has("autocmd")

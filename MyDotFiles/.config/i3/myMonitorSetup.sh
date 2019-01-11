@@ -7,11 +7,12 @@
 #fi;
 #echo $KBD;
 #echo $KBD > /sys/class/leds/asus::kbd_backlight/brightness
-ViewSonic="HDMI-2 connected"
+ViewSonic="HDMI2 connected"
 
 if xrandr | grep -q $ViewSonic;
 	then echo "monitor found";
-	xrandr --output HDMI-2 --mode 1920x1080 --pos 1920x0
+	xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0
 else
+	xrandr --auto
 	echo "no match";
 fi

@@ -35,22 +35,52 @@ markup=none
 #command=date '+%H:%M  %Y-%m-%d'
 #interval=5
 
+#[test]
+#command=mpstat -P ALL 1 1 | awk '/Average:/ && $2 ~ /all/ {print $3}'
+#command=$SCRIPT_DIR/$BLOCK_NAME
+#interval=5
+#label=TT
+
+
 [calendar]
 command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
 interval=5
-label= 
+label=
 #DATEFMT=+%H:%M:%S
 #SHORTFMT=+%H:%M:%S
 #HEIGHT=180
 #WIDTH=220
 
+# Network interface monitoring
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+[iface]
+command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+#IFACE=wlan0
+color=#00FF00
+interval=10
+#separator=false
+
+#[wifi]
+#command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+#INTERFACE=wlp3s0
+#label=wifi:
+#interval=10
+#separator=false
+
+#[bandwidth]
+#command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+#INTERFACE=eth0
+#interval=5
+
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-label=MEM
-separator=false
+#command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+command=free -h | grep Mem | awk '{printf $3}'
+label=
+#separator=false
 interval=30
 
 #[memory]
@@ -71,28 +101,6 @@ interval=30
 #DIR=/mnt/data
 #interval=30
 
-# Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-[iface]
-command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-#IFACE=wlan0
-color=#00FF00
-interval=10
-separator=false
-
-[wifi]
-command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-#INTERFACE=wlp3s0
-label=wifi:
-interval=10
-separator=false
-
-[bandwidth]
-command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-#INTERFACE=eth0
-interval=5
 
 # CPU usage
 #
@@ -100,10 +108,20 @@ interval=5
 # see the script for details.
 [cpu_usage]
 command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-label=CPU
+label=
 interval=10
-min_width=CPU 100.00%
-#separator=false
+#min_width=CPU 100.0%
+separator=false
+# Temperature
+#
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+label=
+interval=10
+
 
 #[load_average]
 #command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
@@ -115,7 +133,7 @@ min_width=CPU 100.00%
 # The battery instance defaults to 0.
 [battery]
 command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-label=BAT
+label=
 #label=⚡
 interval=30
 
@@ -132,16 +150,6 @@ interval=30
 # Support multiple VPN, with colors.
 #[openvpn]
 #interval=20
-
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[temperature]
-command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-label=TEMP
-interval=10
 
 # Key indicators
 #
@@ -170,7 +178,7 @@ interval=10
 [volume]
 command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
 #label=♪
-label=VOL
+label=
 interval=once
 signal=10
 #STEP=5%
