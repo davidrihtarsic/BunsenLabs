@@ -55,7 +55,7 @@ bindsym $Mod+shift+b border toggle
 # changing border style
 bindsym $Mod+n border normal
 bindsym $Mod+y border 1pixel
-bindsym $Mod+u border none
+#bindsym $Mod+u border none
 
 # change gaps
 bindsym $Mod+plus        gaps inner current plus  15
@@ -102,6 +102,7 @@ bindsym $mod+t exec thunderbird
 bindsym $mod+r exec nemo --no-desktop 
 
 bindsym $Mod+Control+Shift+h exec systemctl hibernate
+bindsym $Mod+Control+Shift+s exec systemctl suspend
 
 # kill focused window
 bindsym Mod1+q kill
@@ -110,6 +111,9 @@ bindsym Mod1+q kill
 bindsym $mod+d exec dmenu_run
 bindsym $mod+s exec ~/bin/rofr.sh -r
 bindsym $mod+v exec ~/bin/emoji/get_emoji.sh
+bindsym $mod+m exec ~/bin/system/mountUSBdisk.sh
+bindsym $mod+Control+F7 exec ~/bin/SwissArmyKnifeGadgets/to-do-list.sh
+#bindsym $mod+u exec ~/bin/system/UNmountUSBdisk.sh
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -145,6 +149,18 @@ bindsym $mod+Shift+Up    move up    105px
 bindsym $mod+Shift+Down  move down  105px
 bindsym $mod+Shift+Left  move left  105px
 bindsym $mod+Shift+Right move right 105px
+
+# => urejanje workspace-a na levi in desni zaslon
+bindsym $Mod+Control+Shift+Left move workspace to output left
+bindsym $Mod+Control+Shift+Right move workspace to output right
+
+# Screenshot
+bindsym Print exec --no-startup-id "scrot '%S.png' \
+            -e 'mv $f $$(xdg-user-dir PICTURES)/screenshots/BunsenLabs-%S-$wx$h.png \
+            ; gpicview $$(xdg-user-dir PICTURES)/screenshots/BunsenLabs-%S-$wx$h.png'"
+
+# Monitor Controll
+bindsym $Mod+Control+d exec ~/.config/i3/displayControlWithDmenu.sh 
 
 # Size
 bindsym $mod+Control+h     resize shrink width  100 px or 10 ppt
@@ -195,8 +211,8 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # monitors
-set $Mon1 eDP-1
-set $Mon2 HDMI-2
+set $Mon1 eDP1
+set $Mon2 HDMI2
 
 # workspace assignment
 workspace 1 output $Mon1

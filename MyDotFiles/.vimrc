@@ -28,6 +28,7 @@ filetype plugin indent on    " required
 "################################
 " My SETUP                      #
 "################################
+	set autoread
   filetype on
 	syntax on
 	"set hidden
