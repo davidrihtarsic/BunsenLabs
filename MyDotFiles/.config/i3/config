@@ -112,7 +112,7 @@ bindsym $mod+d exec dmenu_run
 bindsym $mod+s exec ~/bin/rofr.sh -r
 bindsym $mod+v exec ~/bin/emoji/get_emoji.sh
 bindsym $mod+m exec ~/bin/system/mountUSBdisk.sh
-bindsym $mod+Control+F7 exec ~/bin/SwissArmyKnifeGadgets/to-do-list.sh
+bindsym $mod+F7 exec ~/bin/SwissArmyKnifeGadgets/to-do-list.sh
 #bindsym $mod+u exec ~/bin/system/UNmountUSBdisk.sh
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that

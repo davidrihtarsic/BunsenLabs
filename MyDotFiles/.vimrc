@@ -59,8 +59,8 @@ filetype plugin indent on    " required
 
   highlight PmenuSel ctermfg=red  ctermbg=yellow
 
-	let mapleader=" "
-	map <leader>u :source ~/.vimrc<CR>
+	let mapleader=","
+	noremap <leader>c :source ~/.vimrc<CR>
 	noremap <leader>q :q<cr>
 	set laststatus=2
 "###########################################################
